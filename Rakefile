@@ -1,7 +1,3 @@
-require "sinatra/activerecord/rake"
-
-namespace :db do
-  task :load_config do
-    require "./app"
-  end
+task :run do
+  rerun "app.rb"
 end

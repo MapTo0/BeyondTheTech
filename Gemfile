@@ -2,6 +2,8 @@
 source "https://rubygems.org"
 
 gem "sinatra"
-gem "sinatra-activerecord"
+gem "rerun"
 gem "sqlite3"
 gem "rake"
+gem "data_mapper"
+gem 'bcrypt-ruby', :require => 'bcrypt'

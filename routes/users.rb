@@ -1,1 +1,5 @@
-# Define routes for user Auth
+get '/users' do
+  # @users = User.all
+
+  # @users
+end
