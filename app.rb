@@ -7,10 +7,6 @@ require_relative 'models/users'
 require_relative 'routes/users'
 
 get '/' do
-  'Hello world!'
-end
-
-get '/home' do
   erb :home
 end
 
