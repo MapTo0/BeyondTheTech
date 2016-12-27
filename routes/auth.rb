@@ -15,9 +15,11 @@ post '/register' do
   user = User.create(email: email, username: username, password: password_hash, admin: false)
 
   if user.saved?
-    status 200
+    session[:username] = username
+    puts 'redirecting'
+    # redirect to('/posts')
   else
-    status 400
+    status 403
   end
 end
 
@@ -26,9 +28,12 @@ post '/login' do
   password = params['password']
   matching_user = User.first(:username => username)
 
-  if matching_user.password == password
-    status 200
+
+  if matching_user && (matching_user.password == password)
+    session[:username] = username
+    # redirect to('/posts')
   else
     status 401
   end
+
 end

@@ -1,17 +1,33 @@
-<div class="register-form">
-	<label for="username">Username</label>
-	<input type="text" name="username" id="username">
+<div class="content">
+  <header class="header">
+    <h1 class="logo">Beyond The Tech</h1>
+    <nav class="navigation">
+      <ul class="menu left-navigation">
+        <li><a href="/">Home</a></li>
+        <li><a href="/posts">Posts</a></li>
+        <li><a href="/login">Log in</a></li>
+        <li><a href="/register" class="active">Sign up</a></li>
+      </ul>
+    </nav>
 
-	<label for="password">Password</label>
-	<input type="password" name="password" id="password">
+  </header>
+  <hr class="separator">
 
-	<label for="email">Email</label>
-	<input type="email" name="email" id="email">
+  <main class="main">
+	<div class="register-form">
+		<label for="username" class="auth-label">Username</label>
+		<input type="text" class="auth-input" name="username" id="username">
 
-	<button type="submit" id="register">Register</button>
+		<label for="password" class="auth-label">Password</label>
+		<input type="password" class="auth-input" name="password" id="password">
+
+		<label for="email" class="auth-label">Email</label>
+		<input type="email" class="auth-input" name="email" id="email">
+
+		<button type="submit" class="auth-button" id="register">Register</button>
+	</div>
+  </main>
 </div>
-
-<h1>Sign in</h1>
-
 <script src="scripts/auth.js" charset="utf-8" defer></script>
+
 

@@ -13,11 +13,15 @@
             url: "/register",
             method: "POST",
             data: user,
-            dataType: "json"
-        }).done(function(msg) {
-            console.log(msg);
-        }).fail(function(msg) {
-            console.log(msg);
+            dataType: "json",
+            statusCode: {
+            	200: function () {
+            		window.location.href = "/posts";
+            	},
+            	403: function () {
+            		alert("Provided data is invalid");
+            	}
+            }
         });
     });
 
@@ -31,11 +35,15 @@
             url: "/login",
             method: "POST",
             data: user,
-            dataType: "json"
-        }).done(function(msg) {
-            console.log(msg);
-        }).fail(function(msg) {
-            console.log(msg);
+            dataType: "json",
+            statusCode: {
+            	200: function () {
+            		window.location.href = "/posts";
+            	},
+            	401: function () {
+            		alert("Invalid credentials");
+            	}
+            }
         });
     });
 }());
