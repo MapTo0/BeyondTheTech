@@ -8,15 +8,11 @@
 #   erb :posts
 # end
 
+
+require 'json'
+require 'pry'
 get '/posts' do
-  # matches "GET /posts?title=foo&author=bar"
-  # title = params['title']
-
-  @post = Post.all[0]
-
-  p @post.comments
-
-  'wtf'
+  Post.all.to_a.to_s
 end
 
 get '/posts/view' do
@@ -29,11 +25,12 @@ get '/posts/:id/view' do
 end
 
 post '/posts' do
-  post = Post.create(date: Time.now, active: true, title: "test Title", body: "Some body", imageURL: "http://google.bg")
 
-  if post.saved?
-    puts 'post savd'
-  else
-    puts 'fail'
-  end
+  title = params[:title]
+  body = params[:body]
+  image_url = params[:imageUrl]
+  post = Post.create(date: Time.now, active: true, title: title, body: body, imageURL: image_url)
+  binding.pry
+
+  Post.all.to_a.to_s
 end
