@@ -3,5 +3,3 @@ class Tag
 
   property :id, Serial
 end
-
-DataMapper.finalize

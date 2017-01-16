@@ -1,8 +1,8 @@
-get '/register' do
+get '/register/view' do
   erb :register
 end
 
-get '/login' do
+get '/login/view' do
   erb :login
 end
 
@@ -17,7 +17,6 @@ post '/register' do
   if user.saved?
     session[:username] = username
     puts 'redirecting'
-    # redirect to('/posts')
   else
     status 403
   end
@@ -27,7 +26,6 @@ post '/login' do
   username = params['username']
   password = params['password']
   matching_user = User.first(:username => username)
-
 
   if matching_user && (matching_user.password == password)
     session[:username] = username

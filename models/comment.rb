@@ -5,5 +5,3 @@ class Comment
   belongs_to :post
   has 1, :user
 end
-
-DataMapper.finalize

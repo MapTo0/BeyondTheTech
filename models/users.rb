@@ -7,10 +7,8 @@ class User
   property :password, BCryptHash
   property :admin, Boolean
 
-  # belongs_to :post
-  # belongs_to :comment
+  belongs_to :post
+  belongs_to :comment
 
   # validates_length_of  :password, :min => 8
 end
-
-DataMapper.finalize

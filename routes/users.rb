@@ -1,5 +1,5 @@
 get '/users' do
-  # @users = User.all
+  @users = User.all
 
-  # @users
+  @users.to_a.to_s
 end

@@ -3,13 +3,11 @@ class Post
 
   property :id, Serial
   property :date, DateTime
-  property :valid, Boolean
+  property :active, Boolean
   property :title, String
   property :body, String
-  property :image, String # an URL
+  property :imageURL, String # an URL
 
-  has n, :comments
   has 1, :user
+  has n, :comments
 end
-
-DataMapper.finalize
