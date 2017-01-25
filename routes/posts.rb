@@ -11,26 +11,33 @@
 
 require 'json'
 require 'pry'
+
 get '/posts' do
-  Post.all.to_a.to_s
+  p Post.all.to_a.to_s
 end
 
 get '/posts/view' do
 end
 
-get '/posts/:id' do
+get '/posts/:id/' do
+  p 'here'
+end
+
+get '/posts/create' do
+  username = session[:username]
+  p User.first(:username => username)
+  erb :create_post
 end
 
 get '/posts/:id/view' do
 end
 
 post '/posts' do
-
   title = params[:title]
-  body = params[:body]
+  body = params[:body] # this will be a markdown
   image_url = params[:imageUrl]
-  post = Post.create(date: Time.now, active: true, title: title, body: body, imageURL: image_url)
-  binding.pry
+  user = User.first(:username => session[:username])
+  post = Post.create(date: Time.now, active: true, title: title, body: body, image_url: image_url)
 
   Post.all.to_a.to_s
 end

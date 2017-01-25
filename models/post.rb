@@ -5,9 +5,10 @@ class Post
   property :date, DateTime
   property :active, Boolean
   property :title, String
-  property :body, String
-  property :imageURL, String # an URL
+  property :body, String, :length => 1000
+  property :image_url, String # an URL
 
   has 1, :user
-  has n, :comments
+  has n, :comments, :required => false
+  has n, :tags, :required => false
 end

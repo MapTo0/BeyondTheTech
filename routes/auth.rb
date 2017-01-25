@@ -14,6 +14,10 @@ post '/register' do
 
   user = User.create(email: email, username: username, password: password_hash, admin: false)
 
+  p user
+  p User.all.size.to_s
+  p user.errors
+
   if user.saved?
     session[:username] = username
     puts 'redirecting'
