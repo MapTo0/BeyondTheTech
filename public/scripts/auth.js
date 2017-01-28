@@ -10,19 +10,20 @@
         }
 
         $.ajax({
-            url: "/register",
-            method: "POST",
-            data: user,
-            dataType: "json",
-            statusCode: {
-            	200: function () {
-            		window.location.href = "/posts";
-            	},
-            	403: function () {
-            		alert("Provided data is invalid");
-            	}
-            }
-        });
+           url: "/register",
+           method: "POST",
+           data: user,
+           dataType: "json",
+           statusCode: {
+               200: function() {
+                   window.location.href = "/";
+               },
+               403: function() {
+                   alert("Provided data is invalid");
+               }
+           }
+       });
+
     });
 
     loginButton.click(function() {
@@ -38,7 +39,7 @@
             dataType: "json",
             statusCode: {
             	200: function () {
-            		window.location.href = "/posts";
+            		window.location.href = "/";
             	},
             	401: function () {
             		alert("Invalid credentials");

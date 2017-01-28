@@ -1,41 +1,26 @@
 <div class="content">
-  <header class="header">
-    <div class="header-content">
-      <h1 class="logo">Beyond The Tech</h1>
-      <nav class="navigation">
-        <ul class="menu left-navigation">
-          <li><a href="/">Home</a></li>
-          <li><a href="/posts">Posts</a></li>
-          <li><a href="/login" class="active">Log in</a></li>
-          <li><a href="/register">Sign up</a></li>
-        </ul>
-      </nav>
-    </div>
-    <hr class="separator">
-  </header>
-
   <main class="main">
     <div id="create-blog-wrapper">
       <div class="blog-attr-wrapper">
-        <label class="blog-attr-label" for="blog-title">Title: </label>
+        <label class="blog-attr-label" for="blog-title"><%= texts["POST_TITLE"] %></label>
         <input type="text" id="blog-title" name="title">
       </div>
       <div class="blog-attr-wrapper">
-        <label class="blog-attr-label" for="blog-image-url">Image URL: </label>
+        <label class="blog-attr-label" for="blog-image-url"><%= texts["POST_IMAGE_URL"] %></label>
         <input type="text" id="blog-image-url" name="image">
       </div>
       <div class="blog-attr-wrapper">
-        <label class="blog-attr-label" for="blog-body">Body: </label>
-        <label class="blog-attr-sub-label" for="blog-body">(You can use Markdown for formatting)</label>
+        <label class="blog-attr-label" for="blog-body"><%= texts["POST_BODY"] %></label>
+        <label class="blog-attr-sub-label" for="blog-body"><%= texts["POST_MARKDOWN_INFO"] %></label>
         <textarea name="body" id="blog-body"></textarea>
       </div>
 
       <div class="blog-attr-wrapper">
-        <label class="blog-attr-label" for="blog-tags">Tags: </label>
-        <label class="blog-attr-sub-label" for="blog-tags">(Please separate tags with a space)</label>
+        <label class="blog-attr-label" for="blog-tags"><%= texts["POST_TAGS"] %></label>
+        <label class="blog-attr-sub-label" for="blog-tags"><%= texts["POST_TAG_INFO"] %></label>
         <input type="text" id="blog-tags">
       </div>
-      <input type="button" name="create-blog" id="create-post" value="Create Post">
+      <input type="button" name="create-blog" id="create-post" value="<%= texts["POST_CREATE"] %>">
     </div>
 
   </main>

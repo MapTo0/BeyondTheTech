@@ -21,6 +21,7 @@ body {
     width: 100%;
     display: flex;
     align-self: center;
+    justify-content: space-between;
 }
 
 .main {
@@ -304,4 +305,12 @@ textarea {
 
 .post-image-wrapper {
     width: 50%;
+}
+
+.lng {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    background-color: red;
+    cursor: pointer
 }

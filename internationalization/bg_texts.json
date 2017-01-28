@@ -1,0 +1,22 @@
+{
+    "MENU_HOME": "Начало",
+    "MENU_POSTS": "Статии",
+    "MENU_LOGIN": "Влизане",
+    "MENU_LOGOUT": "Излизане",
+    "MENU_REGISTER": "Регистрация",
+    "MENU_CREATE_POST": "Нова статия",
+    "HOME_FROM": "от",
+    "HOME_COMMENTS": "коментара",
+    "AUTH_USERNAME": "Потребителско име",
+    "AUTH_PASSWORD": "Парола",
+    "AUTH_ENTER": "Влизане",
+    "AUTH_EMAIL": "Имейл",
+    "AUTH_REGISTER": "Регистрирай ме",
+    "POST_TITLE": "Заглавие",
+    "POST_IMAGE_URL": "Адрес на снимка",
+    "POST_BODY": "Съдържание",
+    "POST_TAGS": "Тагове",
+    "POST_CREATE": "Създаване на статия",
+    "POST_MARKDOWN_INFO": "(Може да използвате Markdown за форматиране)",
+    "POST_TAG_INFO": "(Моля разделете таговете с интервал)"
+}

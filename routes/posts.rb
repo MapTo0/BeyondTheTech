@@ -21,7 +21,7 @@ get '/posts/view' do
 end
 
 get '/posts/create' do
-  erb :create_post
+  erb :create_post, locals: { texts: get_texts }
 end
 
 get '/posts/:id/view' do
@@ -31,7 +31,7 @@ get '/posts/:id/view' do
   renderer = Redcarpet::Render::HTML.new()
   markdown = Redcarpet::Markdown.new(renderer)
 
-  erb :view_post, locals: { post: post, body: markdown.render(post.body), markdown_renderer: markdown }
+  erb :view_post, locals: { post: post, body: markdown.render(post.body), markdown_renderer: markdown, texts: get_texts }
 end
 
 post '/posts' do

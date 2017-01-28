@@ -1,9 +1,14 @@
-get '/register/view' do
-  erb :register
+get '/register' do
+  erb :register, locals: { texts: get_texts }
 end
 
-get '/login/view' do
-  erb :login
+get '/login' do
+  erb :login, locals: { texts: get_texts }
+end
+
+get '/logout' do
+  session['username'] = nil
+  redirect '/'
 end
 
 post '/register' do
@@ -13,10 +18,6 @@ post '/register' do
   password_hash = BCrypt::Password.create(password)
 
   user = User.create(email: email, username: username, password: password_hash, admin: false)
-
-  p user
-  p User.all.size.to_s
-  p user.errors
 
   if user.saved?
     session[:username] = username
@@ -37,5 +38,4 @@ post '/login' do
   else
     status 401
   end
-
 end

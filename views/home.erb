@@ -1,18 +1,4 @@
 <div class="content">
-  <header class="header">
-    <h1 class="logo">Beyond The Tech</h1>
-    <nav class="navigation">
-      <ul class="menu left-navigation">
-        <li><a href="/" class="active">Home</a></li>
-        <li><a href="/posts">Posts</a></li>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/register">Sign up</a></li>
-      </ul>
-    </nav>
-
-  </header>
-  <hr class="separator">
-
   <main class="main">
     <div class="post-container">
       <% for i in (1..5) %>
@@ -23,14 +9,14 @@
           <div class="short-post-body">
             <div>
               <h2 class="short-post-title">A piece of the Nature</h2>
-              <h2 class="short-post-author">by Martin R. Hristov</h2>
+              <h2 class="short-post-author"><%= texts["HOME_FROM"] %> Martin R. Hristov</h2>
               <h2 class="short-post-date">25.12.2016</h2>
             </div>
             <p class="short-post-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse</p>
-            <span class="short-post-comments">420 comments</span>
+            <span class="short-post-comments">420 <%= texts["HOME_COMMENTS"] %></span>
           </div>
         </div>
 

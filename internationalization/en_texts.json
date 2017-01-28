@@ -1,0 +1,22 @@
+{
+    "MENU_HOME": "Home",
+    "MENU_POSTS": "Posts",
+    "MENU_LOGIN": "Log in",
+    "MENU_LOGOUT": "Log out",
+    "MENU_REGISTER": "Register",
+    "MENU_CREATE_POST": "Create post",
+    "HOME_FROM": "by",
+    "HOME_COMMENTS": "comments",
+    "AUTH_USERNAME": "Username",
+    "AUTH_PASSWORD": "Password",
+    "AUTH_ENTER": "Enter",
+    "AUTH_EMAIL": "Email",
+    "AUTH_REGISTER": "Register",
+    "POST_TITLE": "Title",
+    "POST_IMAGE_URL": "Image URL",
+    "POST_BODY": "Body",
+    "POST_TAGS": "Tags",
+    "POST_CREATE": "Create post",
+    "POST_MARKDOWN_INFO": "(You can use Markdown for formatting)",
+    "POST_TAG_INFO": "(Please separate tags with a space)"
+}
