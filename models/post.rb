@@ -5,7 +5,7 @@ class Post
   property :date, DateTime
   property :active, Boolean
   property :title, String
-  property :body, String, :length => 1000
+  property :body, String, :length => 10000
   property :image_url, String, :length => 1000 # an URL
 
   has 1, :user

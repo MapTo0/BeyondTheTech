@@ -31,7 +31,6 @@ get '/posts/:id/view' do
   renderer = Redcarpet::Render::HTML.new()
   markdown = Redcarpet::Markdown.new(renderer)
 
-
   erb :view_post, locals: { post: post, body: markdown.render(post.body), markdown_renderer: markdown }
 end
 
@@ -45,9 +44,11 @@ post '/posts' do
   post = Post.new(date: Time.now, active: true, title: title, body: body, image_url: image_url)
 
   tags.each { |tag| post.tags << tag }
-  post.user = user
+  # post.user = user
+  #
 
   post.save
+  p post.errors
 end
 
 post '/posts/:id/comment' do
@@ -59,10 +60,6 @@ post '/posts/:id/comment' do
   comment = Comment.new(text: comment_text)
   comment.post = post
   comment.user = user
-
-  p comment
-  p post
-  p user
 
   comment.save
 end
