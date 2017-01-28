@@ -7,3 +7,4 @@ gem "sqlite3"
 gem "rake"
 gem "data_mapper"
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'redcarpet'

@@ -11,25 +11,28 @@
 
 require 'json'
 require 'pry'
+require 'redcarpet'
 
 get '/posts' do
-  p Post.all.to_a.to_s
 end
 
 get '/posts/view' do
-end
-
-get '/posts/:id/' do
-  p 'here'
+  p Post.all
 end
 
 get '/posts/create' do
-  username = session[:username]
-  p User.first(:username => username)
   erb :create_post
 end
 
 get '/posts/:id/view' do
+  id = params[:id].to_i
+  post = Post.get(id)
+
+  renderer = Redcarpet::Render::HTML.new()
+  markdown = Redcarpet::Markdown.new(renderer)
+
+
+  erb :view_post, locals: { post: post, body: markdown.render(post.body), markdown_renderer: markdown }
 end
 
 post '/posts' do
@@ -37,7 +40,29 @@ post '/posts' do
   body = params[:body] # this will be a markdown
   image_url = params[:imageUrl]
   user = User.first(:username => session[:username])
-  post = Post.create(date: Time.now, active: true, title: title, body: body, image_url: image_url)
+  tags = params[:tags].split(" ").uniq.map { |tag| Tag.first_or_new(text: tag) }
 
-  Post.all.to_a.to_s
+  post = Post.new(date: Time.now, active: true, title: title, body: body, image_url: image_url)
+
+  tags.each { |tag| post.tags << tag }
+  post.user = user
+
+  post.save
+end
+
+post '/posts/:id/comment' do
+  user_id = params['userId'].to_i
+  comment_text = params['text']
+  user = User.get(user_id)
+  post = Post.get(params[:id].to_i)
+
+  comment = Comment.new(text: comment_text)
+  comment.post = post
+  comment.user = user
+
+  p comment
+  p post
+  p user
+
+  comment.save
 end

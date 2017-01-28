@@ -6,9 +6,9 @@ class Post
   property :active, Boolean
   property :title, String
   property :body, String, :length => 1000
-  property :image_url, String # an URL
+  property :image_url, String, :length => 1000 # an URL
 
   has 1, :user
-  has n, :comments, :required => false
-  has n, :tags, :required => false
+  has n, :comments
+  has n, :tags, :through => Resource
 end
