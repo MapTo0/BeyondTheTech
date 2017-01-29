@@ -25,7 +25,6 @@ body {
 }
 
 .main {
-    height: 80%;
     justify-content: center;
     display: flex;
 }
@@ -193,7 +192,7 @@ body {
     margin-top: 5%;
 }
 
-#create-post {
+.post-btn {
     width: 40%;
     align-self: center;
     background-color: brown;
@@ -313,4 +312,27 @@ textarea {
     margin-top: 5px;
     background-color: red;
     cursor: pointer
+}
+
+.blog-attr-wrapper {
+    margin-top: 5%;
+}
+
+.create-post-buttons {
+    align-self: flex-end;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    font-size: 0.8rem;
+}
+
+.lang-wrapper {
+    align-self: flex-end;
+    display: flex;
+    font-size: 0.8rem;
+    flex-direction: column;
+}
+
+#language-select {
+    margin-top: 10px;
 }

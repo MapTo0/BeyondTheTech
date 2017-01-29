@@ -1,14 +1,3 @@
-# get '/posts' do
-#   puts session[:username]
-
-#   # TODO: find the exact user by username
-#   # check if he is an admin
-#   # render the right view (with or without creating a blog posts)
-#   #
-#   erb :posts
-# end
-
-
 require 'json'
 require 'pry'
 require 'redcarpet'
@@ -30,25 +19,44 @@ get '/posts/:id/view' do
 
   renderer = Redcarpet::Render::HTML.new()
   markdown = Redcarpet::Markdown.new(renderer)
+  post_content = post.postContents.first(:language => session['lng'])
 
-  erb :view_post, locals: { post: post, body: markdown.render(post.body), markdown_renderer: markdown, texts: get_texts }
+  erb :view_post, locals: { post: post, post_content: post_content, body: markdown.render(post_content.body), markdown_renderer: markdown, texts: get_texts }
 end
 
 post '/posts' do
   title = params[:title]
-  body = params[:body] # this will be a markdown
+  body = params[:body]
   image_url = params[:imageUrl]
+  language = params[:language]
   user = User.first(:username => session[:username])
   tags = params[:tags].split(" ").uniq.map { |tag| Tag.first_or_new(text: tag) }
 
-  post = Post.new(date: Time.now, active: true, title: title, body: body, image_url: image_url)
+  post = Post.new(date: Time.now, active: true, image_url: image_url)
+
+  postContent = PostContent.new(title: title, body: body, language: language, post_id: post.id)
+
+  post.postContents << postContent
 
   tags.each { |tag| post.tags << tag }
-  # post.user = user
-  #
 
   post.save
-  p post.errors
+
+  post.id.to_s
+end
+
+put '/posts/:id' do
+  title = params[:title]
+  body = params[:body]
+  post_id = params[:id].to_i
+  language = params[:language]
+  post = Post.get(post_id)
+
+  postContent = PostContent.new(title: title, body: body, language: language, post_id: post_id)
+
+  post.postContents << postContent
+
+  post.save
 end
 
 post '/posts/:id/comment' do

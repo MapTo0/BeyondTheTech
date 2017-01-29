@@ -2,25 +2,37 @@
   <main class="main">
     <div id="create-blog-wrapper">
       <div class="blog-attr-wrapper">
-        <label class="blog-attr-label" for="blog-title"><%= texts["POST_TITLE"] %></label>
+        <label class="blog-attr-label" for="blog-title"><%= texts["POST_TITLE_ENGLISH"] %></label>
         <input type="text" id="blog-title" name="title">
       </div>
-      <div class="blog-attr-wrapper">
+      <div class="blog-attr-wrapper" id="blog-image">
         <label class="blog-attr-label" for="blog-image-url"><%= texts["POST_IMAGE_URL"] %></label>
         <input type="text" id="blog-image-url" name="image">
       </div>
       <div class="blog-attr-wrapper">
-        <label class="blog-attr-label" for="blog-body"><%= texts["POST_BODY"] %></label>
+        <label class="blog-attr-label" for="blog-body"><%= texts["POST_BODY_ENGLISH"] %></label>
         <label class="blog-attr-sub-label" for="blog-body"><%= texts["POST_MARKDOWN_INFO"] %></label>
+
+        <div class="lang-wrapper">        
+          <label for="language-select">Select Language</label>
+          <select id="language-select">
+            <option value="bg">Bulgarian</option>
+            <option value="en">English</option>
+          </select>
+        </div>
         <textarea name="body" id="blog-body"></textarea>
       </div>
 
-      <div class="blog-attr-wrapper">
+      <div class="blog-attr-wrapper" id="post-tags">
         <label class="blog-attr-label" for="blog-tags"><%= texts["POST_TAGS"] %></label>
         <label class="blog-attr-sub-label" for="blog-tags"><%= texts["POST_TAG_INFO"] %></label>
         <input type="text" id="blog-tags">
       </div>
-      <input type="button" name="create-blog" id="create-post" value="<%= texts["POST_CREATE"] %>">
+
+      <div class="create-post-buttons">
+        <input type="button" name="create-blog" id="create-post" class="post-btn" value="<%= texts["POST_CREATE"] %>">
+        <input type="button" class="post-btn" name="continue-blog" id="add-language-btn" value="Continue with other language">
+      </div>
     </div>
 
   </main>
