@@ -12,13 +12,15 @@
     "AUTH_ENTER": "Влизане",
     "AUTH_EMAIL": "Имейл",
     "AUTH_REGISTER": "Регистрирай ме",
-    "POST_TITLE_ENGLISH": "Заглавие (Английски)",
-    "POST_TITLE_BULGARIAN": "Заглавие (Български)",
+    "POST_TITLE": "Заглавие",
     "POST_IMAGE_URL": "Адрес на снимка",
-    "POST_BODY_ENGLISH": "Съдържание (Английски)",
-    "POST_BODY_BULGARIAN": "Съдържание (Български)",
+    "POST_BODY": "Съдържание",
     "POST_TAGS": "Тагове",
     "POST_CREATE": "Създаване на статия",
     "POST_MARKDOWN_INFO": "(Може да използвате Markdown за форматиране)",
-    "POST_TAG_INFO": "(Моля разделете таговете с интервал)"
+    "POST_TAG_INFO": "(Моля разделете таговете с интервал)",
+    "POST_SELECT_LANG": "Изберете език за статията",
+    "POST_BULGARIAN": "Български",
+    "POST_ENGLISH": "Английски",
+    "POST_ADD_LANGUAGE": "Добави версия на друг език"
 }

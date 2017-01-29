@@ -33,13 +33,10 @@ post '/posts' do
   tags = params[:tags].split(" ").uniq.map { |tag| Tag.first_or_new(text: tag) }
 
   post = Post.new(date: Time.now, active: true, image_url: image_url)
-
   postContent = PostContent.new(title: title, body: body, language: language, post_id: post.id)
 
   post.postContents << postContent
-
   tags.each { |tag| post.tags << tag }
-
   post.save
 
   post.id.to_s

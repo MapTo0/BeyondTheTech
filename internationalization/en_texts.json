@@ -12,13 +12,15 @@
     "AUTH_ENTER": "Enter",
     "AUTH_EMAIL": "Email",
     "AUTH_REGISTER": "Register",
-    "POST_TITLE_ENGLISH": "Title (English)",
-    "POST_TITLE_BULGARIAN": "Title (Bulgarian)",
+    "POST_TITLE": "Title",
     "POST_IMAGE_URL": "Image URL",
-    "POST_BODY_ENGLISH": "Body (Use English)",
-    "POST_BODY_BULGARIAN": "Body (Use Bulgarian)",
+    "POST_BODY": "Content",
     "POST_TAGS": "Tags",
     "POST_CREATE": "Create post",
     "POST_MARKDOWN_INFO": "(You can use Markdown for formatting)",
-    "POST_TAG_INFO": "(Please separate tags with a space)"
+    "POST_TAG_INFO": "(Please separate tags with a space)",
+    "POST_SELECT_LANG": "Select post language",
+    "POST_BULGARIAN": "Bulgarian",
+    "POST_ENGLISH": "English",
+    "POST_ADD_LANGUAGE": "Add other language to the post"
 }
