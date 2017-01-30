@@ -1,37 +1,40 @@
-  <html>
-    <head>
-      <title>Beyond The Tech</title>
-      <link rel="stylesheet" type="text/css" href="/css/styles.css">
-      <link rel="stylesheet" type="text/css" href="/css/flags/flags.css">
-      <script src="/scripts/jquery-3.1.1.min.js" charset="utf-8" defer></script>
-      <script src="/scripts/main.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body>
-      <div class="content">
-        <header class="header">
-          <div class="header-content">
-            <h1 class="logo">Beyond The Tech</h1>
-            <nav class="navigation">
-              <ul class="menu left-navigation">
-                <li><a href="/"><%= texts["MENU_HOME"] %></a></li>
-                <li><a href="/posts"><%= texts["MENU_POSTS"] %></a></li>
-                <% if session['username'] %>
+<html>
+  <head>
+    <title>Beyond The Tech</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/flags/flags.css">
+    <script src="/scripts/jquery-3.1.1.min.js" charset="utf-8" defer></script>
+    <script src="/scripts/main.js" type="text/javascript" charset="utf-8" defer></script>
+  </head>
+  <body>
+    <div class="content">
+      <header class="header">
+        <div class="header-content">
+          <h1 class="logo">Beyond The Tech</h1>
+          <nav class="navigation">
+            <ul class="menu left-navigation">
+              <li><a href="/"><%= texts["MENU_HOME"] %></a></li>
+              <li><a href="/posts"><%= texts["MENU_POSTS"] %></a></li>
+              <% if session['user_id'] %>
+                <% if User.get(session['user_id']).admin %>
                   <li><a href="/posts/create"><%= texts["MENU_CREATE_POST"] %></a></li>
-                  <li><a href="/logout"><%= texts["MENU_LOGOUT"] %></a></li>
-                <% else %>
-                  <li><a href="/login"><%= texts["MENU_LOGIN"] %></a></li>
-                  <li><a href="/register"><%= texts["MENU_REGISTER"] %></a></li>
+                    <li><a href="/users"><%= texts["MENU_USERS"] %></a></li>
                 <% end %>
-              </ul>
-            </nav>
-            <div class="languages">
-              <div class="lng flag flag-us" data-ln="en"></div>
-              <div class="lng flag flag-bg" data-ln="bg"></div>
-            </div>
+                <li><a href="/logout"><%= texts["MENU_LOGOUT"] %></a></li>
+              <% else %>
+                <li><a href="/login"><%= texts["MENU_LOGIN"] %></a></li>
+                <li><a href="/register"><%= texts["MENU_REGISTER"] %></a></li>
+              <% end %>
+            </ul>
+          </nav>
+          <div class="languages">
+            <div class="lng flag flag-us" data-ln="en"></div>
+            <div class="lng flag flag-bg" data-ln="bg"></div>
           </div>
-          <hr class="separator">
-        </header>
-        <%= yield %>
-      </div>
-    </body>
-  </html>
+        </div>
+        <hr class="separator">
+      </header>
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -13,6 +13,8 @@ require_relative 'routes/posts'
 enable :sessions
 
 get '/' do
+  #User.get(1).update({ :admin => true })
+
   erb :home, locals: { texts: get_texts }
 end
 
@@ -23,7 +25,7 @@ end
 
 def get_texts
   language = session['lng'] || 'en'
-  texts = File.read('internationalization/' + language + '_texts.json')
+  texts = File.read('i18n/' + language + '_texts.json')
   JSON.parse(texts)
 end
 

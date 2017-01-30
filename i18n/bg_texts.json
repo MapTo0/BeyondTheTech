@@ -5,6 +5,7 @@
     "MENU_LOGOUT": "Излизане",
     "MENU_REGISTER": "Регистрация",
     "MENU_CREATE_POST": "Нова статия",
+    "MENU_USERS": "Потребители",
     "HOME_FROM": "от",
     "HOME_COMMENTS": "коментара",
     "AUTH_USERNAME": "Потребителско име",
@@ -22,5 +23,7 @@
     "POST_SELECT_LANG": "Изберете език за статията",
     "POST_BULGARIAN": "Български",
     "POST_ENGLISH": "Английски",
-    "POST_ADD_LANGUAGE": "Добави версия на друг език"
+    "POST_ADD_LANGUAGE": "Добави версия на друг език",
+    "USERS_USERNAME": "Потребителско име",
+    "USERS_EMAIL": "Имейл"
 }

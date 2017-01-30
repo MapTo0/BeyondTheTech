@@ -5,6 +5,7 @@
     "MENU_LOGOUT": "Log out",
     "MENU_REGISTER": "Register",
     "MENU_CREATE_POST": "Create post",
+    "MENU_USERS": "Users",
     "HOME_FROM": "by",
     "HOME_COMMENTS": "comments",
     "AUTH_USERNAME": "Username",
@@ -22,5 +23,7 @@
     "POST_SELECT_LANG": "Select post language",
     "POST_BULGARIAN": "Bulgarian",
     "POST_ENGLISH": "English",
-    "POST_ADD_LANGUAGE": "Add other language to the post"
+    "POST_ADD_LANGUAGE": "Add other language to the post",
+    "USERS_USERNAME": "Username",
+    "USERS_EMAIL": "Email"
 }

@@ -1,0 +1,42 @@
+<main class="main">
+    <div class="user-wrapper admin-list-wrapper">
+      <ul class="user-list admin-list">
+        <% admins.each do |user| %>
+          <li>
+            <div class="user-profile">
+              <img src="/images/user.png" class="user-icon" alt="user-icon">
+              <div class="user-info">
+                <span><%= texts["USERS_USERNAME"] %>: <%= user.username %></span>
+                <span><%= texts["USERS_EMAIL"] %>: <%= user.email %></span>
+              </div>
+
+              <div class="user-rights">
+                <img src="/images/remove-admin.png" data-user-id="<%= user.id %>" class="user-icon remove-admin" alt="Remove admin">
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="user-wrapper regular-list-wrapper">
+      <ul class="user-list regular-lists">
+        <% regulars.each do |user| %>
+          <li>
+            <div class="user-profile">
+              <img src="/images/user.png" class="user-icon" alt="user-icon">
+              <div class="user-info">
+                <span><%= texts["USERS_USERNAME"] %>: <%= user.username %></span>
+                <span><%= texts["USERS_EMAIL"] %>: <%= user.email %></span>
+              </div>
+              <div class="user-rights">
+                <img data-user-id="<%= user.id %>" src="/images/add-admin.png" class="user-icon add-admin" alt="Add admin">
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+</main>
+
+<script src="/scripts/users.js" charset="utf-8" defer></script>

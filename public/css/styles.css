@@ -50,7 +50,7 @@ body {
 
 .menu li {
     display: inline;
-    padding-left: 10%;
+    padding-left: 5%;
 }
 
 .menu li a {
@@ -335,4 +335,38 @@ textarea {
 
 #language-select {
     margin-top: 10px;
+}
+
+.user-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.user-wrapper {
+    padding: 2%;
+    width: 50%;
+}
+
+.user-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.user-list > li {
+    border: 1px solid brown;
+    margin-top: 1%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    line-height: 1.5;
+}
+
+.user-profile {
+    display: flex;
+    padding: 5%;
+    justify-content: space-between;
 }

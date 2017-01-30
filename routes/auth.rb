@@ -7,21 +7,21 @@ get '/login' do
 end
 
 get '/logout' do
-  session['username'] = nil
+  session[:user_id] = nil
   redirect '/'
 end
 
 post '/register' do
-  username = params["username"]
-  email = params["email"]
-  password = params["password"]
+  username = params['username']
+  email = params['email']
+  password = params['password']
   password_hash = BCrypt::Password.create(password)
 
   user = User.create(email: email, username: username, password: password_hash, admin: false)
 
   if user.saved?
-    session[:username] = username
-    puts 'redirecting'
+    session[:user_id] = user.id
+    status 200
   else
     status 403
   end
@@ -33,8 +33,8 @@ post '/login' do
   matching_user = User.first(:username => username)
 
   if matching_user && (matching_user.password == password)
-    session[:username] = username
-    # redirect to('/posts')
+    session[:user_id] = matching_user.id
+    status 200
   else
     status 401
   end

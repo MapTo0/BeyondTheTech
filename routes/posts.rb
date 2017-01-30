@@ -29,7 +29,7 @@ post '/posts' do
   body = params[:body]
   image_url = params[:imageUrl]
   language = params[:language]
-  user = User.first(:username => session[:username])
+  user = User.first(:username => session[:user_id])
   tags = params[:tags].split(" ").uniq.map { |tag| Tag.first_or_new(text: tag) }
 
   post = Post.new(date: Time.now, active: true, image_url: image_url)
