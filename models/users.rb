@@ -7,7 +7,7 @@ class User
   property :password, BCryptHash
   property :admin, Boolean
 
-  belongs_to :post, :required => false
+  has n, :posts
   belongs_to :comment, :required => false
 
   # validates_length_of  :password, :min => 8

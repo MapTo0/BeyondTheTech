@@ -24,6 +24,9 @@
     "POST_BULGARIAN": "Български",
     "POST_ENGLISH": "Английски",
     "POST_ADD_LANGUAGE": "Добави версия на друг език",
+    "POST_ACTIVE": "Активна",
     "USERS_USERNAME": "Потребителско име",
-    "USERS_EMAIL": "Имейл"
+    "USERS_EMAIL": "Имейл",
+    "USERS_ADMIN": "Администратори",
+    "USERS_REGULAR": "Потребители"
 }

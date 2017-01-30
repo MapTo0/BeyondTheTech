@@ -38,9 +38,7 @@ body {
 }
 
 .post-container {
-    height: 100%;
-    width: 80%;
-    background-color: white;
+    padding: 0 5%;
 }
 
 .navigation {
@@ -177,7 +175,7 @@ body {
     width: 100%;
 }
 
-.blog-attr-wrapper input {
+.blog-attr-wrapper input[type=text] {
     width: 100%;
     border: none;
     outline: none;
@@ -333,7 +331,8 @@ textarea {
     flex-direction: column;
 }
 
-#language-select {
+#language-select,
+#active {
     margin-top: 10px;
 }
 
@@ -369,4 +368,47 @@ textarea {
     display: flex;
     padding: 5%;
     justify-content: space-between;
+}
+
+.users-titles {
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+}
+
+.post-settings {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-bar {
+    width: 50%;
+}
+
+.filter-bar {
+    width: 100%;
+    display: flex;
+}
+
+.criteria {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+    padding: 0 5%;
+}
+
+.criteria-select {
+    width: 50%;
+    font-size: 1rem;
+}
+
+.order img {
+    width: 35px;
+    height: 35px;
+    margin-left: 10%;
+}
+
+.main.posts {
+    flex-direction: column;
 }

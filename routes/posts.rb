@@ -3,10 +3,9 @@ require 'pry'
 require 'redcarpet'
 
 get '/posts' do
-end
-
-get '/posts/view' do
-  p Post.all
+  tags = Tag.all
+  bloggers = User.all.delete_if { |user| user.posts.size == 0 }
+  erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers }
 end
 
 get '/posts/create' do
@@ -29,15 +28,19 @@ post '/posts' do
   body = params[:body]
   image_url = params[:imageUrl]
   language = params[:language]
-  user = User.first(:username => session[:user_id])
+  active = params[:active]
+  user = User.get(session[:user_id].to_i)
   tags = params[:tags].split(" ").uniq.map { |tag| Tag.first_or_new(text: tag) }
 
-  post = Post.new(date: Time.now, active: true, image_url: image_url)
+  post = Post.new(date: Time.now, active: active, image_url: image_url)
   postContent = PostContent.new(title: title, body: body, language: language, post_id: post.id)
 
   post.postContents << postContent
+  user.posts << post
   tags.each { |tag| post.tags << tag }
   post.save
+
+  post.errors
 
   post.id.to_s
 end
@@ -48,6 +51,8 @@ put '/posts/:id' do
   post_id = params[:id].to_i
   language = params[:language]
   post = Post.get(post_id)
+
+  p Post.all
 
   postContent = PostContent.new(title: title, body: body, language: language, post_id: post_id)
 

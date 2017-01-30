@@ -13,8 +13,6 @@ require_relative 'routes/posts'
 enable :sessions
 
 get '/' do
-  #User.get(1).update({ :admin => true })
-
   erb :home, locals: { texts: get_texts }
 end
 

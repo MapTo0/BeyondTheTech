@@ -20,6 +20,7 @@ post '/register' do
   user = User.create(email: email, username: username, password: password_hash, admin: false)
 
   if user.saved?
+    p 'hereeeeee'
     session[:user_id] = user.id
     status 200
   else

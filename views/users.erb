@@ -1,5 +1,6 @@
 <main class="main">
     <div class="user-wrapper admin-list-wrapper">
+      <h2 class="users-titles"><%= texts["USERS_ADMIN"] %></h2>
       <ul class="user-list admin-list">
         <% admins.each do |user| %>
           <li>
@@ -20,6 +21,7 @@
     </div>
 
     <div class="user-wrapper regular-list-wrapper">
+      <h2 class="users-titles"><%= texts["USERS_REGULAR"] %></h2>
       <ul class="user-list regular-lists">
         <% regulars.each do |user| %>
           <li>

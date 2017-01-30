@@ -24,6 +24,9 @@
     "POST_BULGARIAN": "Bulgarian",
     "POST_ENGLISH": "English",
     "POST_ADD_LANGUAGE": "Add other language to the post",
+    "POST_ACTIVE": "Active",
     "USERS_USERNAME": "Username",
-    "USERS_EMAIL": "Email"
+    "USERS_EMAIL": "Email",
+    "USERS_ADMIN": "Admins",
+    "USERS_REGULAR": "Regulars"
 }

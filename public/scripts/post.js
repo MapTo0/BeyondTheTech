@@ -15,6 +15,7 @@
         $("#post-tags").fadeOut();
         $("#blog-image").fadeOut();
         $("#add-language-btn").fadeOut();
+        $("#active").fadeOut();
         $("#language-select option[value='" + $("#language-select").val() + "']").remove();
 
         createPostBtn.unbind('click', createPostHandler);
@@ -27,7 +28,8 @@
             "body": $("#blog-body").val(),
             "imageUrl": $("#blog-image-url").val(),
             "tags": $("#blog-tags").val(),
-            "language": $("#language-select").val()
+            "language": $("#language-select").val(),
+            "active": ($("#active:checked").length > 0)
         }
 
         $.ajax({

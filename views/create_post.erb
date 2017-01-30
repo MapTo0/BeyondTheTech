@@ -13,12 +13,19 @@
         <label class="blog-attr-label" for="blog-body"><%= texts["POST_BODY"] %></label>
         <label class="blog-attr-sub-label" for="blog-body"><%= texts["POST_MARKDOWN_INFO"] %></label>
 
-        <div class="lang-wrapper">        
-          <label for="language-select"><%= texts["POST_SELECT_LANG"] %></label>
-          <select id="language-select">
-            <option value="bg"><%= texts["POST_BULGARIAN"] %></option>
-            <option value="en"><%= texts["POST_ENGLISH"] %></option>
-          </select>
+        <div class="post-settings"> 
+          <div class="active-wrapper lang-wrapper">
+            <label for="active"><%= texts["POST_ACTIVE"] %></label>
+            <input type="checkbox" id="active" name="active">
+          </div>
+
+          <div class="lang-wrapper">
+            <label for="language-select"><%= texts["POST_SELECT_LANG"] %></label>
+            <select id="language-select">
+              <option value="bg"><%= texts["POST_BULGARIAN"] %></option>
+              <option value="en"><%= texts["POST_ENGLISH"] %></option>
+            </select>
+          </div>
         </div>
         <textarea name="body" id="blog-body"></textarea>
       </div>
