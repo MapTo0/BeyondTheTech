@@ -5,7 +5,76 @@ require 'redcarpet'
 get '/posts' do
   tags = Tag.all
   bloggers = User.all.delete_if { |user| user.posts.size == 0 }
-  erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers }
+  author_id = params['authorId'].to_i || 0
+  tag = params['tag'] || "all"
+  byDate = params['byDate'] || ""
+  byCommentCount = params['byCommentCount'] || ""
+
+  user = User.get(author_id)
+  query = Post.all
+
+  if author_id > 0
+    query = query.all(:user => user)
+    if tag != "all"
+      query = query & Tag.all(:text => tag).posts
+    end
+  else
+    if tag != "all"
+      query = Tag.all(:text => tag).posts
+    end
+  end
+
+  if byDate != ""
+    query = query.all(:order => (byDate == 'desc' ? :date.desc : :date.asc))
+  end
+
+  if byCommentCount != ""
+    query = query.sort_by do |post|
+      if byCommentCount == 'desc'
+        -post.comments.count
+      else
+        post.comments.count
+      end
+    end
+  end
+
+  erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers, posts: query }
+end
+
+get '/posts/query' do
+  author_id = params['authorId'].to_i
+  tag = params['tag']
+  byDate = params['byDate']
+  byCommentCount = params['byCommentCount']
+
+  user = User.get(author_id)
+  query = Post.all
+
+  if author_id > 0
+    query = query.all(:user => user)
+    if tag != "all"
+      query = query & Tag.all(:text => tag).posts
+    end
+  else
+    if tag != "all"
+      query = Tag.all(:text => tag).posts
+    end
+  end
+
+  if byDate != ""
+    query = query.all(:order => (byDate == 'desc' ? :date.desc : :date.asc))
+  end
+
+  if byCommentCount != ""
+    query = query.sort_by do |post|
+      if byCommentCount == 'desc'
+        -post.comments.count
+      else
+        post.comments.count
+      end
+    end
+  end
+  query
 end
 
 get '/posts/create' do
@@ -40,7 +109,7 @@ post '/posts' do
   tags.each { |tag| post.tags << tag }
   post.save
 
-  post.errors
+  p post.errors
 
   post.id.to_s
 end
@@ -51,8 +120,6 @@ put '/posts/:id' do
   post_id = params[:id].to_i
   language = params[:language]
   post = Post.get(post_id)
-
-  p Post.all
 
   postContent = PostContent.new(title: title, body: body, language: language, post_id: post_id)
 
@@ -70,6 +137,7 @@ post '/posts/:id/comment' do
   comment = Comment.new(text: comment_text)
   comment.post = post
   comment.user = user
+  post.comments << comment
 
   comment.save
 end

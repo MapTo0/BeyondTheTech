@@ -1,48 +1,59 @@
 <main class="main posts">
   <div class="filter-bar">
-    <div class="header-bar serch-bar">
-      <h2 class="users-titles">Searching</h2>
-      <div class="criterias">
-        <div class="criteria">
-          <label>Author is: </label>
-          <select name="username" class="criteria-select">
-            <option value="all">All</option>
-            <% bloggers.each do |blogger| %>
-              <option value="<%= blogger.username %>"><%= blogger.username %></option>
-            <% end %>
-          </select>
+    <div class="action-bar">
+      <div class="header-bar serch-bar">
+        <h2 class="users-titles">Searching</h2>
+        <div class="criterias">
+          <div class="criteria">
+            <label>Author is: </label>
+            <select name="username" class="criteria-select">
+              <option value="all">All</option>
+              <% bloggers.each do |blogger| %>
+                <option value="<%= blogger.id %>"><%= blogger.username %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="criteria">
+            <label>Has Tag: </label>
+            <select name="tags" class="criteria-select">
+              <option value="all">All</option>
+              <% tags.each do |tag| %>
+                <option value="<%= tag.text %>"><%= tag.text %></option>
+              <% end %>
+            </select>
+          </div>
         </div>
-        <div class="criteria">
-          <label>Has Tag: </label>
-          <select name="tags" class="criteria-select">
-            <option value="all">All</option>
-            <% tags.each do |tag| %>
-              <option value="<%= tag.text %>"><%= tag.text %></option>
-            <% end %>
-          </select>
+      </div>
+
+      <div class="header-bar order-bar">
+        <h2 class="users-titles">Ordering</h2>
+        <div class="criterias">
+          <div class="criteria order">
+            <label>By Date</label>
+              <select name="date" class="criteria-select">
+                <option value="">n/a</option>}
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+          </div>
+
+          <div class="criteria order">
+            <label>By comments count</label>
+              <select name="comment" class="criteria-select">
+                <option value="">n/a</option>}
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="header-bar order-bar">
-      <h2 class="users-titles">Ordering</h2>
-      <div class="criterias">
-        <div class="criteria order">
-          <label>By Date</label>
-          <img src="/images/order.png" alt="Order by">
-        </div>
-
-        <div class="criteria order">
-          <label>By comments count</label>
-          <img src="/images/order.png" alt="Order by">
-        </div>
-      </div>
-    </div>
+    <input type="button" name="search" class="post-btn search-btn" value="Go">
   </div>
 
   <hr class="separator">
     <div class="post-container">
-      <% for i in (1..5) %>
+      <% posts.each do |post| %>
         <div class="short-post">
           <div class="short-post-image-container">
             <img class="short-post-image" src="http://cdn.playbuzz.com/cdn/925704be-9b8e-4dfc-852e-f24d720cb9c5/bcf39e88-5731-43bb-9d4b-e5b3b2b1fdf2.jpg" alt="Blogpost image">
@@ -65,3 +76,5 @@
       <% end %>
     </div>
 </main>
+
+<script src="/scripts/queryPosts.js" charset="utf-8" defer></script>
