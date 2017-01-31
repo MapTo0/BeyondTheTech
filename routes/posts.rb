@@ -2,54 +2,23 @@ require 'json'
 require 'pry'
 require 'redcarpet'
 
-get '/posts' do
+get '/posts/view' do
   tags = Tag.all
+  posts = Post.all
   bloggers = User.all.delete_if { |user| user.posts.size == 0 }
-  author_id = params['authorId'].to_i || 0
-  tag = params['tag'] || "all"
-  byDate = params['byDate'] || ""
-  byCommentCount = params['byCommentCount'] || ""
-
-  user = User.get(author_id)
-  query = Post.all
-
-  if author_id > 0
-    query = query.all(:user => user)
-    if tag != "all"
-      query = query & Tag.all(:text => tag).posts
-    end
-  else
-    if tag != "all"
-      query = Tag.all(:text => tag).posts
-    end
-  end
-
-  if byDate != ""
-    query = query.all(:order => (byDate == 'desc' ? :date.desc : :date.asc))
-  end
-
-  if byCommentCount != ""
-    query = query.sort_by do |post|
-      if byCommentCount == 'desc'
-        -post.comments.count
-      else
-        post.comments.count
-      end
-    end
-  end
-
-  erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers, posts: query }
+  erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers, posts: posts}
 end
 
-get '/posts/query' do
+get '/posts' do
   author_id = params['authorId'].to_i
-  tag = params['tag']
+  tag = params['tag'] || "all"
   byDate = params['byDate']
   byCommentCount = params['byCommentCount']
 
   user = User.get(author_id)
   query = Post.all
 
+  # refactor this piece of shit
   if author_id > 0
     query = query.all(:user => user)
     if tag != "all"
@@ -74,7 +43,11 @@ get '/posts/query' do
       end
     end
   end
-  query
+  # ------------------------------
+
+  # TODO: send some informating regarding body and title
+  # consider the language localization
+  query.to_json
 end
 
 get '/posts/create' do
