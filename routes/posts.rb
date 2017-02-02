@@ -43,11 +43,32 @@ get '/posts' do
       end
     end
   end
-  # ------------------------------
 
-  # TODO: send some informating regarding body and title
-  # consider the language localization
-  query.to_json
+  data = []
+
+  p query
+
+  query.each do |post|
+    post_content = post.postContents.bsearch { |content| content.language == session['lng'] }
+
+    p '-----'
+    p Post.all.size
+    p '-----'
+    if post_content
+      # p
+      data << {
+        'title': post_content.title,
+        'author': User.get(post.user_id),
+        'body': post_content.body,
+        'date': post.date,
+        'image': post.image_url,
+        'commentCount': post.comments.count,
+        'language': session['lng']
+      }
+    end
+  end
+
+  data.to_json
 end
 
 get '/posts/create' do

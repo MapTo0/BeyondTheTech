@@ -98,6 +98,9 @@ body {
 .short-post-body {
     width: 50%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .short-post-text {
@@ -109,12 +112,13 @@ body {
 .short-post {
     display: flex;
     align-items: center;
-    height: 25%;
+    height: 20%;
     margin-top: 2%;
 }
 
 .short-post-comments {
     color: chocolate;
+    align-self: flex-end;
 }
 
 .post-separator {
