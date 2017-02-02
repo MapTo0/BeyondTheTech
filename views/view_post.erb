@@ -47,16 +47,24 @@
       <ul class="comments-list">
         <% post.comments.each do |comment| %>
         <li class="comment-list-item">
-      	  <div class="comment-wrapper">
+      	  <div class="comment-wrapper" data-comment-id="<%= comment.id %>">
       	  	<div class="comment-author-image-wrapper">
       	  		<img src="/images/user.png" alt="comment-author-image" class="comment-author-image user-icon">
-      	  		<span class="author-name"> <%= comment.user ? comment.user.username : nil %></span>
+      	  		<span class="author-name"> <%= comment.user.username %></span>
             </div>
             <div class="comment-body-wrapper">
                 <div class="comment-text"><%=
                    markdown_renderer.render(comment.text)
                  %> </div>
+
+                 <textarea class="edit-comment"></textarea>
       	  	</div>
+            <div class="comment-body-edit">
+              <% if session[:user_id] && User.get(session[:user_id]).admin %>
+                <img src="/images/edit.png" alt="edit post" class="post-action-icon edit-icon">
+                <img src="/images/save.png" alt="save post" class="post-action-icon save-icon">
+               <% end %>
+            </div>
       	  </div>
         </li>
         <% end %>

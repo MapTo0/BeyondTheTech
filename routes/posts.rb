@@ -152,3 +152,17 @@ def get_post_content post_id
 
   post_content[0]
 end
+
+def get_post_comment comment_id
+  Comment.get(comment_id)
+end
+
+get '/comments/:id/edit' do
+  comment = get_post_comment(params[:id].to_i)
+  comment.to_json
+end
+
+put '/comments/:id/edit' do
+  comment = get_post_comment(params[:id].to_i)
+  comment.update({ :text => params[:text]})
+end

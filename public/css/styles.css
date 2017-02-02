@@ -297,7 +297,8 @@ body {
 }
 
 .comment-body-wrapper {
-    width: 90%;
+    padding: 10px 10px;
+    width: 80%;
     display: flex;
     flex-direction: column;
 }
@@ -502,4 +503,30 @@ textarea {
     display: none;
     align-self: flex-end;
     height: 20px;
+}
+
+.post-action-icon {
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+}
+
+.comment-body-edit {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.save-icon {
+    top: -10px;
+    display: none;
+}
+
+.edit-comment {
+    height: 80px;
+    display: none;
 }

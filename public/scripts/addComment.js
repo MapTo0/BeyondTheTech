@@ -59,3 +59,45 @@ $(".save-post-btn").click(function() {
         }
     });
 });
+
+$(".edit-icon").click(function(event) {
+    var save = $(event.target).parent().find(".save-icon");
+    var edit = $(event.target);
+    var comment = $(event.target).parent().parent().find('.comment-text');
+    var textarea = $(event.target).parent().parent().find('.edit-comment');
+    var commentId = $(event.target).parent().parent().attr('data-comment-id');
+    $(save).fadeIn();
+    $(comment).fadeOut();
+    $(textarea).fadeIn();
+
+    $.ajax({
+        url: "/comments/" + commentId + "/edit",
+        method: "GET",
+        statusCode: {
+            200: function(data) {
+                data = JSON.parse(data);
+                textarea.val(data.text);
+            },
+            403: function() {}
+        }
+    });
+});
+
+$(".save-icon").click(function() {
+    var save = $(event.target);
+    var textarea = $(event.target).parent().parent().find('.edit-comment');
+    var commentId = $(event.target).parent().parent().attr('data-comment-id');
+
+    $.ajax({
+        url: "/comments/" + commentId + "/edit",
+        method: "PUT",
+        data: { text: textarea.val() },
+        dataType: "json",
+        statusCode: {
+            200: function() {
+                window.location.reload();
+            },
+            403: function() {}
+        }
+    });
+});
