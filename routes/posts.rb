@@ -46,16 +46,10 @@ get '/posts' do
 
   data = []
 
-  p query
-
   query.each do |post|
-    post_content = post.postContents.bsearch { |content| content.language == session['lng'] }
+    post_content = post.postContents.select { |content| content.language == session['lng'] }[0]
 
-    p '-----'
-    p Post.all.size
-    p '-----'
     if post_content
-      # p
       data << {
         'title': post_content.title,
         'author': User.get(post.user_id),
@@ -63,7 +57,9 @@ get '/posts' do
         'date': post.date,
         'image': post.image_url,
         'commentCount': post.comments.count,
-        'language': session['lng']
+        'language': session['lng'],
+        'id': post.id,
+        'tags': post.tags.map { |tag| "#" + tag.text }
       }
     end
   end
@@ -123,7 +119,7 @@ put '/posts/:id' do
 end
 
 post '/posts/:id/comment' do
-  user_id = params['userId'].to_i
+  user_id = session['user_id'].to_i
   comment_text = params['text']
   user = User.get(user_id)
   post = Post.get(params[:id].to_i)
@@ -131,7 +127,28 @@ post '/posts/:id/comment' do
   comment = Comment.new(text: comment_text)
   comment.post = post
   comment.user = user
+  user.comments << comment
   post.comments << comment
 
   comment.save
+end
+
+get '/posts/:id/edit' do
+  post_content = get_post_content(params[:id]).to_json
+end
+
+put '/posts/:id/edit' do
+  post_content = get_post_content(params[:id])
+
+  post_content.update({ :body => params[:body], :title => params[:title] })
+end
+
+def get_post_content post_id
+  post = Post.get(post_id)
+
+  post_content = post.postContents.select do |content|
+    content.language == session['lng']
+  end
+
+  post_content[0]
 end

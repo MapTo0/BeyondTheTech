@@ -6,20 +6,28 @@
         <img class="post-image" src="<%= post.image_url %>" alt="blog image">
       </div>
       <div class="post-info">
-        <h1><%= post_content.title %></h1>
-        <h3>author: <%= p post %></h3>
-        <span>posted on: <%= post.date %></span>
+        <div class="post-text-info">
+          <h1 class="post-title"><%= post_content.title %></h1>
+          <input type="text" name="title" value="" class="edit-title">
+          <h3><%= texts["HOME_FROM"] %>: <span class="browns"><%= post.user.username %></span></h3>
+          <span><%= texts["VIEW_POST_POSTED"] %>: <%= post.date %></span>
+        </div>
+       <% if session[:user_id] && User.get(session[:user_id]).admin %>
+          <input type="button" class="post-btn edit-post-btn" name="edit" value="Edit">
+          <input type="button" class="post-btn save-post-btn" name="save" value="Save">
+        <% end %>
       </div>
     </div>
 
     <div class="post-body"><%= body %></div>
 
+    <textarea class="edit-post-area"></textarea>
 
     <div class="blog-footer">
-      <span class="post-tags">tags: <%=
+      <span class="post-tags">Tags: <span class="browns"><%=
       tags = ''
-      post.tags.each { |tag| tags += tag.text + " "}
-      tags %></span>
+      post.tags.each { |tag| tags += "#" + tag.text + " "}
+      tags %></span></span>
       <span class="post-comments-count"><%= p post.comments.size %> comments</span>
     </div>
 
@@ -28,7 +36,7 @@
       <hr class="separator">
       <div class="add-comment">
         <span>Submit your comment</span>
-        <textarea name="comment"></textarea>
+        <textarea class="comment-area" name="comment"></textarea>
         <input type="button" value="submit" id="comment-btn">
       </div>
     <% end %>
@@ -41,13 +49,13 @@
         <li class="comment-list-item">
       	  <div class="comment-wrapper">
       	  	<div class="comment-author-image-wrapper">
-      	  		<img src="" alt="comment-author-image">
-      	  	</div>
-      	  	<div class="comment-body-wrapper">
-      	  		<span class="author-name"> <%= comment.user.username %></span>
-                <p class="comment-text"><%=
+      	  		<img src="/images/user.png" alt="comment-author-image" class="comment-author-image user-icon">
+      	  		<span class="author-name"> <%= comment.user ? comment.user.username : nil %></span>
+            </div>
+            <div class="comment-body-wrapper">
+                <div class="comment-text"><%=
                    markdown_renderer.render(comment.text)
-                 %> </p>
+                 %> </div>
       	  	</div>
       	  </div>
         </li>

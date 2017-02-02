@@ -75,6 +75,11 @@ body {
     color: brown;
 }
 
+.short-post-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .short-post-author {
     margin: 0;
     font-size: 1.2rem;
@@ -88,11 +93,13 @@ body {
 }
 
 .short-post-image-container {
-    width: 50%;
+    width: 35%;
+    height: 100%;
 }
 
 .short-post-image {
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .short-post-body {
@@ -107,6 +114,7 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    color: slateblue;
 }
 
 .short-post {
@@ -203,6 +211,7 @@ body {
     height: 5%;
     outline: none;
     margin: 5% 0 2% 0;
+    cursor: pointer;
 }
 
 .blog-attr-label {
@@ -217,8 +226,8 @@ body {
 }
 
 .post-image {
-    height: 100%;
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .post-header {
@@ -258,6 +267,7 @@ body {
 .blog-footer {
     display: flex;
     justify-content: space-between;
+    margin-top: 30px;
 }
 
 .comments-list {
@@ -267,14 +277,27 @@ body {
 
 .comment-wrapper {
     display: flex;
+    min-height: 100px;
+}
+
+.author-name {
+    position: relative;
+    left: 10px;
+    top: 20px;
 }
 
 .comment-author-image-wrapper {
-    width: 30%;
+    width: 10%;
+}
+
+.comment-author-image {
+    position: relative;
+    top: 10px;
+    left: 10px;
 }
 
 .comment-body-wrapper {
-    width: 70%;
+    width: 90%;
     display: flex;
     flex-direction: column;
 }
@@ -302,10 +325,6 @@ textarea {
 .comment-btn {
     align-self: flex-end;
     width: 100px;
-}
-
-.post-image-wrapper {
-    width: 50%;
 }
 
 .lng {
@@ -425,4 +444,62 @@ textarea {
     display: flex;
     flex-direction: column;
     align-items: center
+}
+
+.comment-list-item {
+    border: 1px solid brown;
+    margin-top: 20px;
+}
+
+.browns {
+    color: brown;
+}
+
+.post-header .post-text-info > * {
+    margin-top: 10px;
+}
+
+.edit-post-btn {
+    align-self: flex-end;
+    height: 20px;
+}
+
+.post-text-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-btn.edit-post-btn {
+    width: 30%;
+}
+
+.comment-author-image-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-post-area {
+    height: 500px;
+    width: 100%;
+    margin-top: 40px;
+    display: none;
+}
+
+.post-body {
+    margin-top: 30px;
+}
+
+.edit-title {
+    display: none;
+}
+
+.save-post-btn {
+    display: none;
+    align-self: flex-end;
+    height: 20px;
 }

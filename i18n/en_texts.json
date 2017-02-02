@@ -28,5 +28,16 @@
     "USERS_USERNAME": "Username",
     "USERS_EMAIL": "Email",
     "USERS_ADMIN": "Admins",
-    "USERS_REGULAR": "Regulars"
+    "USERS_REGULAR": "Regulars",
+    "SEARCH_POST_SEARCH": "Searching",
+    "SEARCH_POST_AUTHOR": "Author is:",
+    "SEARCH_POST_ALL": "All",
+    "SEARCH_POST_HAS_TAG": "Has Tag:",
+    "SEARCH_POST_ORDERING": "Ordering",
+    "SEARCH_POST_NA": "n/a",
+    "SEARCH_POST_ASC": "Ascending",
+    "SEARCH_POST_DESC": "Descending",
+    "SEARCH_POST_BY_CC": "By comments count:",
+    "SEARCH_POST_BY_DATE": "By Date:",
+    "VIEW_POST_POSTED": "Posted on"
 }

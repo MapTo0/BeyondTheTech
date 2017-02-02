@@ -2,7 +2,8 @@ class Comment
   include DataMapper::Resource
 
   property :id, Serial
-  property :text, String
+  property :text, String, :length => 20000
+
   belongs_to :post
-  has 1, :user
+  belongs_to :user
 end

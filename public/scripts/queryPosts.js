@@ -5,8 +5,7 @@
 
     var bg_texts = {
         "COMMENTS": "коментара"
-    }
-
+    };
 
     $(".post-btn").click(function() {
         var authorId = $($(".criteria-select")[0]).val();
@@ -21,10 +20,9 @@
             method: "GET",
             statusCode: {
                 200: function(data) {
-                    $("#test").empty();
-                    console.log(JSON.parse(data));
+                    $("#post-container").empty();
                     JSON.parse(data).forEach(function(post) {
-                        $("#test").append(renderPost(post));
+                        $("#post-container").append(renderPost(post));
                     });
                 },
                 403: function() {}
@@ -39,10 +37,11 @@
             '  </div>' +
             '  <div class="short-post-body">' +
             '    <div>' +
-            '      <h2 class="short-post-title">' + post.title + '</h2>' +
+            '      <h2 class="short-post-title"><a href="/posts/' + post.id + '/view">' + post.title + '</a></h2>' +
             '      <h2 class="short-post-author">' + post.author.username + '</h2>' +
             '      <h2 class="short-post-date">' + post.date + '</h2>' +
             '    </div>' +
+            '    <p class="short-post-text">' + post.tags.join(" ") + '</div>' +
             '    <span class="short-post-comments">' + post.commentCount + " " + eval(post.language + "_texts" + "['COMMENTS']")  + '</span>' +
             '  </div>' +
             '</div>' +

@@ -8,7 +8,5 @@ class User
   property :admin, Boolean
 
   has n, :posts
-  belongs_to :comment, :required => false
-
-  # validates_length_of  :password, :min => 8
+  has n, :comments
 end

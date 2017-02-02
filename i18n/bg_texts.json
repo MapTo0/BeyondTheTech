@@ -28,5 +28,16 @@
     "USERS_USERNAME": "Потребителско име",
     "USERS_EMAIL": "Имейл",
     "USERS_ADMIN": "Администратори",
-    "USERS_REGULAR": "Потребители"
+    "USERS_REGULAR": "Потребители",
+    "SEARCH_POST_SEARCH": "Търсене",
+    "SEARCH_POST_AUTHOR": "Автор:",
+    "SEARCH_POST_ALL": "Всички",
+    "SEARCH_POST_HAS_TAG": "Съдържа Таг:",
+    "SEARCH_POST_ORDERING": "Сортиране",
+    "SEARCH_POST_NA": "Без значение",
+    "SEARCH_POST_ASC": "Възходящ",
+    "SEARCH_POST_DESC": "Низходящ",
+    "SEARCH_POST_BY_CC": "По брой коментари:",
+    "SEARCH_POST_BY_DATE": "По дата на създаване:",
+    "VIEW_POST_POSTED": "Публикуван на"
 }

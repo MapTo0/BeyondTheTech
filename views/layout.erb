@@ -14,7 +14,7 @@
           <nav class="navigation">
             <ul class="menu left-navigation">
               <li><a href="/"><%= texts["MENU_HOME"] %></a></li>
-              <li><a href="/posts"><%= texts["MENU_POSTS"] %></a></li>
+              <li><a href="/posts/view"><%= texts["MENU_POSTS"] %></a></li>
               <% if session['user_id'] %>
                 <% if User.get(session['user_id']).admin %>
                   <li><a href="/posts/create"><%= texts["MENU_CREATE_POST"] %></a></li>
