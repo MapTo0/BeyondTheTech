@@ -1,12 +1,4 @@
 (function() {
-    var en_texts = {
-        "COMMENTS": "comments"
-    };
-
-    var bg_texts = {
-        "COMMENTS": "коментара"
-    };
-
     $(".post-btn").click(function() {
         var authorId = $($(".criteria-select")[0]).val();
         var tag = $($(".criteria-select")[1]).val();
@@ -25,7 +17,8 @@
                         $("#post-container").append(renderPost(post));
                     });
                 },
-                403: function() {}
+                403: function() {
+                }
             }
         });
     });

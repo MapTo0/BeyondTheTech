@@ -7,6 +7,7 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/developm
 require_relative 'models/init'
 
 require_relative 'routes/users'
+require_relative 'routes/navigation'
 require_relative 'routes/auth'
 require_relative 'routes/posts'
 

@@ -50,20 +50,23 @@ get '/posts' do
     post_content = post.postContents.select { |content| content.language == session['lng'] }[0]
 
     if post_content
-      data << {
-        'title': post_content.title,
-        'author': User.get(post.user_id),
-        'body': post_content.body,
-        'date': post.date,
-        'image': post.image_url,
-        'commentCount': post.comments.count,
-        'language': session['lng'],
-        'id': post.id,
-        'tags': post.tags.map { |tag| "#" + tag.text }
-      }
+      if post.active || admin?(session[:user_id])
+        data << {
+          'title': post_content.title,
+          'author': User.get(post.user_id),
+          'body': post_content.body,
+          'date': post.date,
+          'image': post.image_url,
+          'commentCount': post.comments.count,
+          'language': session['lng'],
+          'id': post.id,
+          'tags': post.tags.map { |tag| "#" + tag.text }
+        }
+      end
     end
   end
 
+  p Post.get(4).comments
   data.to_json
 end
 
@@ -99,8 +102,6 @@ post '/posts' do
   tags.each { |tag| post.tags << tag }
   post.save
 
-  p post.errors
-
   post.id.to_s
 end
 
@@ -134,13 +135,20 @@ post '/posts/:id/comment' do
 end
 
 get '/posts/:id/edit' do
-  post_content = get_post_content(params[:id]).to_json
+  post_content = get_post_content(params[:id])
+  { post_content: post_content, active: Post.get(params[:id]).active }.to_json
 end
 
 put '/posts/:id/edit' do
   post_content = get_post_content(params[:id])
+  post = Post.get(params[:id])
 
-  post_content.update({ :body => params[:body], :title => params[:title] })
+  post_content.update({
+    :body => params[:body],
+    :title => params[:title]
+  })
+
+  post.update({ :active => params[:active] })
 end
 
 def get_post_content post_id
@@ -157,6 +165,10 @@ def get_post_comment comment_id
   Comment.get(comment_id)
 end
 
+def admin? user_id
+  User.get(user_id).admin
+end
+
 get '/comments/:id/edit' do
   comment = get_post_comment(params[:id].to_i)
   comment.to_json
@@ -165,4 +177,26 @@ end
 put '/comments/:id/edit' do
   comment = get_post_comment(params[:id].to_i)
   comment.update({ :text => params[:text]})
+end
+
+put '/comments/:id/delete' do
+  comment = get_post_comment(params[:id].to_i)
+  comment.destroy
+end
+
+put '/posts/:id/delete' do
+  post = Post.get(params[:id])
+  post.comments.destroy
+  post.postContents.destroy
+  post.tags.clear
+  post.destroy
+end
+
+def why_you_no_destroy? model
+  preventing = []
+  model.send(:relationships).each do |relationship|
+    next unless relationship.respond_to?(:enforce_destroy_constraint)
+    preventing << relationship.name unless relationship.enforce_destroy_constraint(model)
+  end
+  preventing
 end

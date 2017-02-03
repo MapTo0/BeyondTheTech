@@ -15,8 +15,18 @@
        <% if session[:user_id] && User.get(session[:user_id]).admin %>
           <input type="button" class="post-btn edit-post-btn" name="edit" value="Edit">
           <input type="button" class="post-btn save-post-btn" name="save" value="Save">
+          <div class="activate-post">
+            <label>Active</label>
+            <input type="checkbox" name="activate">
+          </div>
         <% end %>
       </div>
+
+      <% if session[:user_id] && User.get(session[:user_id]).admin %>
+        <div class="delete-post">
+          <img src="/images/delete.png" alt="depete comment" class="post-action-icon delete-post-icon">
+        </div>
+      <% end %>
     </div>
 
     <div class="post-body"><%= body %></div>
@@ -61,8 +71,9 @@
       	  	</div>
             <div class="comment-body-edit">
               <% if session[:user_id] && User.get(session[:user_id]).admin %>
-                <img src="/images/edit.png" alt="edit post" class="post-action-icon edit-icon">
-                <img src="/images/save.png" alt="save post" class="post-action-icon save-icon">
+                <img src="/images/edit.png" alt="edit comment" class="post-action-icon edit-icon">
+                <img src="/images/save.png" alt="save comment" class="post-action-icon save-icon">
+                <img src="/images/delete.png" alt="depete comment" class="post-action-icon delete-icon">
                <% end %>
             </div>
       	  </div>

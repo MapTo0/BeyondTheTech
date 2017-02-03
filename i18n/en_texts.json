@@ -6,6 +6,7 @@
     "MENU_REGISTER": "Register",
     "MENU_CREATE_POST": "Create post",
     "MENU_USERS": "Users",
+    "MENU_PROFILE": "Profile",
     "HOME_FROM": "by",
     "HOME_COMMENTS": "comments",
     "AUTH_USERNAME": "Username",
@@ -13,6 +14,11 @@
     "AUTH_ENTER": "Enter",
     "AUTH_EMAIL": "Email",
     "AUTH_REGISTER": "Register",
+    "AUTH_FORGOTTEN_PASS": "Forgotten password",
+    "AUTH_TYPE_EMAIL": "Enter your email",
+    "AUTH_SEND_PASSWORD": "Send password",
+    "AUTH_NEW_PASS": "Your randomly generated password is",
+    "AUTH_CONSIDER_CHANGE": "Please consider changing your password as soon as possible!",
     "POST_TITLE": "Title",
     "POST_IMAGE_URL": "Image URL",
     "POST_BODY": "Content",
@@ -39,5 +45,10 @@
     "SEARCH_POST_DESC": "Descending",
     "SEARCH_POST_BY_CC": "By comments count:",
     "SEARCH_POST_BY_DATE": "By Date:",
-    "VIEW_POST_POSTED": "Posted on"
+    "VIEW_POST_POSTED": "Posted on",
+    "PROFILE_CURRENT_PASSWORD": "Current password",
+    "PROFILE_NEW_PASSWORD": "New password",
+    "PROFILE_CHANGE_PASSWORD": "Change password",
+    "PROFILE_CHANGE": "Change"
+
 }

@@ -26,15 +26,17 @@ $(".edit-post-btn").click(function() {
     $(".edit-post-area").fadeIn();
     $(".edit-title").fadeIn();
     $(".save-post-btn").fadeIn();
+    $(".activate-post").fadeIn();
 
     $.ajax({
         url: "/posts/" + blogPostId + "/edit",
         method: "GET",
         statusCode: {
-            200: function(data) {
-                data = JSON.parse(data);
-                $(".edit-post-area").val(data.body)
-                $(".edit-title").val(data.title)
+            200: function(post) {
+                post = JSON.parse(post);
+                $(".edit-post-area").val(post.post_content.body)
+                $(".edit-title").val(post.post_content.title)
+                $(".activate-post > input").prop('checked', post.active)
             },
             403: function() {}
         }
@@ -45,10 +47,11 @@ $(".save-post-btn").click(function() {
     var blogPostId = $(".blog-post").attr("data-post-id");
     var body = $(".edit-post-area").val();
     var title = $(".edit-title").val();
+    var active = $(".activate-post > input").prop('checked');
     $.ajax({
         url: "/posts/" + blogPostId + "/edit",
         method: "PUT",
-        data: { body: body, title: title },
+        data: { body: body, title: title, active: active },
         dataType: "json",
         statusCode: {
             200: function() {
@@ -100,4 +103,39 @@ $(".save-icon").click(function() {
             403: function() {}
         }
     });
+});
+
+$(".delete-icon").click(function() {
+    var commentId = $(event.target).parent().parent().attr('data-comment-id');
+    var blogPostId = $(".blog-post").attr("data-post-id");
+
+    if (confirm("Delete comment?")) {
+        $.ajax({
+            url: "/comments/" + commentId + "/delete",
+            method: "PUT",
+            statusCode: {
+                200: function() {
+                    window.location.reload();
+                },
+                403: function() {}
+            }
+        });
+    }
+});
+
+$(".delete-post-icon").click(function() {
+    var blogPostId = $(".blog-post").attr("data-post-id");
+
+    if (confirm("Delete post?")) {
+        $.ajax({
+            url: "/posts/" + blogPostId + "/delete",
+            method: "PUT",
+            statusCode: {
+                200: function() {
+                    window.location = '/posts/view'
+                },
+                403: function() {}
+            }
+        });
+    }
 });

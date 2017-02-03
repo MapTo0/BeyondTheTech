@@ -6,6 +6,7 @@
     "MENU_REGISTER": "Регистрация",
     "MENU_CREATE_POST": "Нова статия",
     "MENU_USERS": "Потребители",
+    "MENU_PROFILE": "Профил",
     "HOME_FROM": "от",
     "HOME_COMMENTS": "коментара",
     "AUTH_USERNAME": "Потребителско име",
@@ -13,6 +14,11 @@
     "AUTH_ENTER": "Влизане",
     "AUTH_EMAIL": "Имейл",
     "AUTH_REGISTER": "Регистрирай ме",
+    "AUTH_FORGOTTEN_PASS": "Забравена парола",
+    "AUTH_TYPE_EMAIL": "Въведете вашият имейл",
+    "AUTH_SEND_PASSWORD": "Изпрати парола",
+    "AUTH_NEW_PASS": "Вашата нова случайно генерирана парола е",
+    "AUTH_CONSIDER_CHANGE": "Моля сменете паролата при първа възможност!",
     "POST_TITLE": "Заглавие",
     "POST_IMAGE_URL": "Адрес на снимка",
     "POST_BODY": "Съдържание",
@@ -39,5 +45,10 @@
     "SEARCH_POST_DESC": "Низходящ",
     "SEARCH_POST_BY_CC": "По брой коментари:",
     "SEARCH_POST_BY_DATE": "По дата на създаване:",
-    "VIEW_POST_POSTED": "Публикуван на"
+    "VIEW_POST_POSTED": "Публикуван на",
+    "PROFILE_CURRENT_PASSWORD": "Текуща парола",
+    "PROFILE_NEW_PASSWORD": "Нова парола",
+    "PROFILE_CHANGE_PASSWORD": "Смяна на парола",
+    "PROFILE_CHANGE": "Смени"
+
 }

@@ -1,0 +1,14 @@
+<main class="main">
+  <div class="change-password">
+  	<h1><%= texts["PROFILE_CHANGE_PASSWORD"] %></h1>
+
+     <label for="password" class="auth-label"><%= texts["PROFILE_CURRENT_PASSWORD"] %></label>
+     <input class="auth-input old-password" type="password" name="password">
+     <label for="password" class="auth-label"><%= texts["PROFILE_NEW_PASSWORD"] %></label>
+     <input class="auth-input new-password" type="password" name="password">
+
+     <input type="button" name="change" class="post-btn change-password-btn" value="<%= texts['PROFILE_CHANGE'] %>">
+  </div>
+</main>
+
+<script src="/scripts/profile.js" charset="utf-8" defer></script>

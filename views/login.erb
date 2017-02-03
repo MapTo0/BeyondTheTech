@@ -7,8 +7,17 @@
       <label for="password" class="auth-label"><%= texts["AUTH_PASSWORD"] %></label>
       <input class="auth-input" type="password" name="password" id="password">
 
-      <button type="submit" id="login" class="auth-button"><%= texts["AUTH_ENTER"] %></button>
-	</div>
+      <div class="submit-password">
+        <button type="submit" id="login" class="auth-button"><%= texts["AUTH_ENTER"] %></button>
+        <span class="forgotten-pass-span"><%= texts["AUTH_FORGOTTEN_PASS"] %></span>
+      </div>
+    </div>
+
+    <div class="forgotten-pass-form login-form">
+	  <label class="auth-label"><%= texts["AUTH_TYPE_EMAIL"] %></label>
+      <input class="auth-input user-email" type="email" name="email">
+      <button type="submit" id="send-password" class="auth-button"><%= texts["AUTH_SEND_PASSWORD"] %></button>
+    </div>
   </main>
 </div>
 <script src="/scripts/auth.js" charset="utf-8" defer></script>

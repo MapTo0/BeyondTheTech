@@ -238,6 +238,7 @@ body {
 
 .blog-post {
     padding: 0 3%;
+    width: 100%;
 }
 
 .post-info {
@@ -528,5 +529,63 @@ textarea {
 
 .edit-comment {
     height: 80px;
+    display: none;
+}
+
+.activate-post {
+    align-self: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.activate-post > label {
+    font-size: 0.8rem;
+}
+
+.delete-icon {
+    top: -10px;
+}
+
+.post-image-wrapper {
+    max-width: 50%;
+}
+
+.change-password {
+    display: flex;
+    height: 80%;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 5%;
+}
+
+.change-password h1 {
+    text-align: center;
+}
+
+.change-password input {
+    width: 60%;
+    margin-top: 20px;
+}
+
+.change-password label {
+    margin-top: 10px;
+}
+
+.submit-password {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-password span {
+    text-align: right;
+    top: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.forgotten-pass-form {
     display: none;
 }
