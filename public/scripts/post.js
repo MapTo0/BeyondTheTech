@@ -6,6 +6,11 @@
     createPostBtn.bind('click', createPostHandler);
 
     addLangbtn.click(function() {
+        if (checkInvalidation()) {
+            alert(eval($("#language-select").val() + "_texts" + "['INVALID_DATA']"));
+            return
+        };
+
         createBlogPost(function(id) {
             postId = id;
         });
@@ -47,6 +52,11 @@
     }
 
     function updateBlogPost(postId, callback) {
+        if (checkInvalidation()) {
+            alert(eval($("#language-select").val() + "_texts" + "['INVALID_DATA']"));
+            return
+        };
+
         let update = {
             "title": $("#blog-title").val(),
             "body": $("#blog-body").val(),
@@ -68,7 +78,19 @@
         });
     }
 
+    function checkInvalidation() {
+        return validateTitle($('#blog-title')) ||
+            validateImage($("#blog-image-url")) ||
+            validateBody($("#blog-body")) ||
+            validateTags($("#blog-tags"));
+    }
+
     function createPostHandler() {
+        if (checkInvalidation()) {
+            alert(eval($("#language-select").val() + "_texts" + "['INVALID_DATA']"));
+            return
+        };
+
         createBlogPost(function() {
             window.location.href = "/";
         });
@@ -78,5 +100,55 @@
         updateBlogPost(postId, function() {
             window.location.href = "/";
         });
+    }
+
+    function validateInputLength(domRef, length) {
+        return ($(domRef).val().length > length);
+    }
+
+    function validateEmptyInput(domRef) {
+        return ($(domRef).val().length === 0);
+    }
+
+    function isUrl(value) {
+        var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+        return regexp.test(value);
+    }
+
+    $('#blog-title').focusout(function() {
+        $(this).toggleClass('error-state', validateTitle(this));
+    });
+
+    $("#blog-image-url").focusout(function() {
+        $(this).toggleClass('error-state', validateImage(this));
+    });
+
+    $("#blog-body").focusout(function() {
+        $(this).toggleClass('error-state', validateBody(this));
+    });
+
+    $("#blog-tags").focusout(function() {
+        $(this).toggleClass('error-state', validateTags(this));
+    });
+
+    function validateTitle(titleRef) {
+        return validateInputLength(titleRef, 50) || validateEmptyInput(titleRef);
+    }
+
+    function validateImage(imageRef) {
+        return !isUrl($(imageRef).val())
+    }
+
+    function validateBody(bodyRef) {
+        return validateInputLength(bodyRef, 10000) || validateEmptyInput(bodyRef);
+    }
+
+    function validateTags(tagsRef) {
+        splitted = $(tagsRef).val().split(" ");
+        hasInvalidValues = !!splitted.filter(function(tag) {
+            return tag.length > 20;
+        }).length;
+
+        return hasInvalidValues;
     }
 }());

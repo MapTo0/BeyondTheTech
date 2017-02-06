@@ -3,7 +3,7 @@ class User
 
   property :id, Serial
   property :email, String, :required => true, :unique => true, :format  => :email_address
-  property :username, String
+  property :username, String, :unique => true, :length => 3..50
   property :password, BCryptHash
   property :admin, Boolean
 

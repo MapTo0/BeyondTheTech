@@ -3,10 +3,16 @@ require 'pry'
 require 'redcarpet'
 
 get '/posts/view' do
-  tags = Tag.all
   posts = Post.all
   bloggers = User.all.delete_if { |user| user.posts.size == 0 }
-  erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers, posts: posts}
+
+  if user_admin?
+    tags = Tag.all
+  else
+    tags = Tag.all.select { |tag| tag.posts.any? { |post| post.active }}
+  end
+
+  erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers, posts: posts }
 end
 
 get '/posts' do
@@ -55,7 +61,7 @@ get '/posts' do
           'title': post_content.title,
           'author': User.get(post.user_id),
           'body': post_content.body,
-          'date': post.date,
+          'date': post.date.strftime("%d.%m.%Y"),
           'image': post.image_url,
           'commentCount': post.comments.count,
           'language': session['lng'],
@@ -78,9 +84,17 @@ get '/posts/:id/view' do
   id = params[:id].to_i
   post = Post.get(id)
 
+  if !post || (!post.active && !user_admin?)
+    redirect '/'
+  end
+
   renderer = Redcarpet::Render::HTML.new()
   markdown = Redcarpet::Markdown.new(renderer)
   post_content = post.postContents.first(:language => session['lng'])
+
+  unless post_content
+    redirect '/'
+  end
 
   erb :view_post, locals: { post: post, post_content: post_content, body: markdown.render(post_content.body), markdown_renderer: markdown, texts: get_texts }
 end
@@ -166,7 +180,12 @@ def get_post_comment comment_id
 end
 
 def admin? user_id
-  User.get(user_id).admin
+  current_user = User.get(user_id)
+  current_user && current_user.admin
+end
+
+def user_admin?
+  admin? session['user_id']
 end
 
 get '/comments/:id/edit' do

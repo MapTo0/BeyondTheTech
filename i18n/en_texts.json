@@ -45,10 +45,13 @@
     "SEARCH_POST_DESC": "Descending",
     "SEARCH_POST_BY_CC": "By comments count:",
     "SEARCH_POST_BY_DATE": "By Date:",
+    "SEARCH_GO": "Search",
     "VIEW_POST_POSTED": "Posted on",
     "PROFILE_CURRENT_PASSWORD": "Current password",
     "PROFILE_NEW_PASSWORD": "New password",
     "PROFILE_CHANGE_PASSWORD": "Change password",
-    "PROFILE_CHANGE": "Change"
-
+    "PROFILE_CHANGE": "Change",
+    "APP_MOTO": "Blog, communicate and have fun!",
+    "APP_YES": "Yes",
+    "АPP_NO": "No"
 }

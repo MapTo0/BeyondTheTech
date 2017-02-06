@@ -45,10 +45,13 @@
     "SEARCH_POST_DESC": "Низходящ",
     "SEARCH_POST_BY_CC": "По брой коментари:",
     "SEARCH_POST_BY_DATE": "По дата на създаване:",
+    "SEARCH_GO": "Търси",
     "VIEW_POST_POSTED": "Публикуван на",
     "PROFILE_CURRENT_PASSWORD": "Текуща парола",
     "PROFILE_NEW_PASSWORD": "Нова парола",
     "PROFILE_CHANGE_PASSWORD": "Смяна на парола",
-    "PROFILE_CHANGE": "Смени"
-
+    "PROFILE_CHANGE": "Смени",
+    "APP_MOTO": "Блогвай, общувай и се забавлявай!",
+    "APP_YES": "Да",
+    "APP_NO": "Не"
 }

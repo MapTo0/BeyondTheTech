@@ -25,7 +25,6 @@
                 }
             }
         });
-
     });
 
     loginButton.click(function() {

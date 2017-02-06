@@ -14,6 +14,7 @@ require_relative 'routes/posts'
 enable :sessions
 
 get '/' do
+  session['lng'] = session['lng'] || 'en'
   erb :home, locals: { texts: get_texts }
 end
 

@@ -92,6 +92,14 @@ body {
     font-weight: normal;
 }
 
+.short-post-info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
 .short-post-image-container {
     width: 35%;
     height: 100%;
@@ -588,4 +596,32 @@ textarea {
 
 .forgotten-pass-form {
     display: none;
+}
+
+.main.home {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+}
+
+.main.home h1 {
+    text-align: center;
+}
+
+.post-status {
+    font-size: 0.8rem;
+}
+
+.active {
+    color: green;
+}
+
+.inactive {
+    color: red;
+}
+
+.error-state {
+    border-bottom: 2px solid red !important;
 }

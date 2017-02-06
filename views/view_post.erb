@@ -10,13 +10,16 @@
           <h1 class="post-title"><%= post_content.title %></h1>
           <input type="text" name="title" value="" class="edit-title">
           <h3><%= texts["HOME_FROM"] %>: <span class="browns"><%= post.user.username %></span></h3>
-          <span><%= texts["VIEW_POST_POSTED"] %>: <%= post.date %></span>
+          <span><%= texts["VIEW_POST_POSTED"] %>: <%= post.date.strftime("%d.%m.%Y") %></span>
+          <% if session[:user_id] && User.get(session[:user_id]).admin %>
+            <span><%= texts["POST_ACTIVE"] %>: <%= post.active ? texts["APP_YES"] : texts["APP_NO"]%></span>
+          <% end %>
         </div>
        <% if session[:user_id] && User.get(session[:user_id]).admin %>
           <input type="button" class="post-btn edit-post-btn" name="edit" value="Edit">
           <input type="button" class="post-btn save-post-btn" name="save" value="Save">
           <div class="activate-post">
-            <label>Active</label>
+            <label><%= texts["POST_ACTIVE"] %></label>
             <input type="checkbox" name="activate">
           </div>
         <% end %>
@@ -34,11 +37,11 @@
     <textarea class="edit-post-area"></textarea>
 
     <div class="blog-footer">
-      <span class="post-tags">Tags: <span class="browns"><%=
+      <span class="post-tags"><%= texts["POST_TAGS"] %>: <span class="browns"><%=
       tags = ''
       post.tags.each { |tag| tags += "#" + tag.text + " "}
       tags %></span></span>
-      <span class="post-comments-count"><%= p post.comments.size %> comments</span>
+      <span class="post-comments-count"><%= p post.comments.size %> <%= texts["HOME_COMMENTS"] %></span>
     </div>
 
 
