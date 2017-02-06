@@ -4,7 +4,7 @@ class Post
   property :id, Serial
   property :date, DateTime
   property :active, Boolean
-  property :image_url, String, :length => 1000 # an URL
+  property :image_url, String, :length => 1000
 
   has n, :postContents
   has n, :comments

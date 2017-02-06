@@ -1,3 +1,7 @@
 task :run do
-  rerun "app.rb"
+  ruby "app.rb"
+end
+
+task :test do
+  ruby "app.rb"
 end

@@ -21,12 +21,16 @@ post '/register' do
 
   user = User.create(email: email, username: username, password: password_hash, admin: false)
 
-  p user.errors
   if user.saved?
     session[:user_id] = user.id
     status 200
   else
-    status 403
+    errors = []
+    user.errors.instance_variable_get("@errors").to_h.each do |property|
+      errors += property[1].map { |error| get_texts[error] }
+    end
+
+    halt 403, errors.compact
   end
 end
 

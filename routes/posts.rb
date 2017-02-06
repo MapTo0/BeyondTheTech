@@ -158,8 +158,8 @@ put '/posts/:id/edit' do
   post = Post.get(params[:id])
 
   post_content.update({
-    :body => params[:body],
-    :title => params[:title]
+                        :body => params[:body],
+                        :title => params[:title]
   })
 
   post.update({ :active => params[:active] })
@@ -209,13 +209,4 @@ put '/posts/:id/delete' do
   post.postContents.destroy
   post.tags.clear
   post.destroy
-end
-
-def why_you_no_destroy? model
-  preventing = []
-  model.send(:relationships).each do |relationship|
-    next unless relationship.respond_to?(:enforce_destroy_constraint)
-    preventing << relationship.name unless relationship.enforce_destroy_constraint(model)
-  end
-  preventing
 end

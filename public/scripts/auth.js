@@ -5,6 +5,14 @@
         sendEmail = $("#send-password");
 
     registerButton.click(function() {
+        if (!checkRegisterValidation()) {
+            var lanuage = sessionStorage['language'] || 'en';
+            message = eval(lanuage + "_texts" + "['INVALID_EMAIL_USERNAME']");
+
+            alert(message);
+            return;
+        }
+
         let user = {
             "username": $("#username").val(),
             "email": $("#email").val(),
@@ -20,8 +28,8 @@
                 200: function() {
                     window.location.href = "/";
                 },
-                403: function() {
-                    alert("Provided data is invalid");
+                403: function(response) {
+                    alert(response.responseText);
                 }
             }
         });
@@ -73,4 +81,14 @@
             }
         });
     });
+
+    function checkRegisterValidation() {
+        var username = $("#username").val(),
+            email = $("#email"),
+            emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            isUsernameValid = username.length > 4 && username.length < 25,
+            isEmailValid = emailPattern.test(email.val());
+
+        return (isUsernameValid && isEmailValid);
+    };
 }());
