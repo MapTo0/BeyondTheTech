@@ -9,3 +9,4 @@ gem "data_mapper"
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'redcarpet'
 gem 'pony'
+gem 'rubocop', require: false

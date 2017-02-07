@@ -1,6 +1,6 @@
 require File.expand_path '../spec_helper.rb', __FILE__
 
-describe 'Authorization' do
+RSpec.describe 'Authorization' do
   def create_and_login_regular_user
     post '/register', { 'username': 'test',
                         'email': 'mail@mail.com',
