@@ -11,3 +11,11 @@ module RSpecMixin
 end
 
 RSpec.configure { |c| c.include RSpecMixin }
+
+DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/spec/blog_test.db")
+DataMapper.finalize
+
+RSpec.configure do |config|
+  # reset database before each example is run
+  config.before(:each) { DataMapper.auto_migrate! }
+end

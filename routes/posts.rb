@@ -77,6 +77,7 @@ get '/posts' do
 end
 
 get '/posts/create' do
+  check_admin_and_redirect
   erb :create_post, locals: { texts: get_texts }
 end
 
@@ -209,4 +210,20 @@ put '/posts/:id/delete' do
   post.postContents.destroy
   post.tags.clear
   post.destroy
+end
+
+def redirect_to_home
+  redirect '/'
+end
+
+def check_auth_and_redirect
+  unless session['user_id']
+    redirect_to_home
+  end
+end
+
+def check_admin_and_redirect
+  unless user_admin?
+    redirect_to_home
+  end
 end

@@ -10,7 +10,7 @@ $(".add-admin").click(function() {
 
 function updateUserRights(action, userId) {
     $.ajax({
-        url: "/users",
+        url: "/user",
         method: "PUT",
         data: { action: action, userId: userId },
         dataType: "json",

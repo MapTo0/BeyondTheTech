@@ -67,7 +67,7 @@
 
     sendEmail.click(function() {
         $.ajax({
-            url: "/users/password",
+            url: "/user/password",
             method: "POST",
             data: { email: $('.user-email').val() },
             dataType: "json",

@@ -3,7 +3,7 @@ $(".change-password-btn").click(function() {
         newPassword = $(".new-password").val();
 
     $.ajax({
-        url: "/users/password",
+        url: "/user/password",
         method: "PUT",
         data: { oldPassword: oldPassword, newPassword: newPassword },
         dataType: "json",
