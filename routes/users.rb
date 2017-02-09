@@ -5,6 +5,11 @@ get '/users' do
                         admins: get_admins_except_current }
 end
 
+get '/user/profile' do
+  check_auth_and_redirect
+  erb :profile, locals: { texts: get_texts }
+end
+
 def get_admins_except_current
   User.all(:admin => true, :id.not => session[:user_id])
 end

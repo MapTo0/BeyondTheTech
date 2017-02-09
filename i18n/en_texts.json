@@ -36,6 +36,10 @@
     "POST_ENGLISH": "English",
     "POST_ADD_LANGUAGE": "Add other language to the post",
     "POST_ACTIVE": "Active",
+    "POST_EDIT": "Edit",
+    "POST_SAVE": "Save",
+    "POST_SUBMIT_COMMENT": "Submit your comments",
+    "POST_SUBMIT": "Submit",
     "USERS_USERNAME": "Username",
     "USERS_EMAIL": "Email",
     "USERS_ADMIN": "Admins",
@@ -60,5 +64,5 @@
     "PROFILE_CHANGE": "Change",
     "APP_MOTO": "Blog, communicate and have fun!",
     "APP_YES": "Yes",
-    "АPP_NO": "No"
+    "APP_NO": "No"
 }

@@ -16,8 +16,8 @@
           <% end %>
         </div>
        <% if session[:user_id] && User.get(session[:user_id]).admin %>
-          <input type="button" class="post-btn edit-post-btn" name="edit" value="Edit">
-          <input type="button" class="post-btn save-post-btn" name="save" value="Save">
+          <input type="button" class="post-btn edit-post-btn" name="edit" value="<%= texts["POST_EDIT"] %>">
+          <input type="button" class="post-btn save-post-btn" name="save" value="<%= texts["POST_SAVE"] %>">
           <div class="activate-post">
             <label><%= texts["POST_ACTIVE"] %></label>
             <input type="checkbox" name="activate">
@@ -48,9 +48,9 @@
     <% if session[:user_id] %>
       <hr class="separator">
       <div class="add-comment">
-        <span>Submit your comment</span>
+        <span><%= texts["POST_SUBMIT_COMMENT"] %></span>
         <textarea class="comment-area" name="comment"></textarea>
-        <input type="button" value="submit" id="comment-btn">
+        <input type="button" value="<%= texts["POST_SUBMIT"] %>" id="comment-btn">
       </div>
     <% end %>
 

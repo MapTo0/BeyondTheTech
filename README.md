@@ -3,23 +3,19 @@
 
 Beyond The Tech is a simple blogging system developed in ruby.
 
-## End points
+## How to run
 
-### GET
- - "/home"
- - "/login/view"
- - "/register/view"
- - "/posts?query"
- - "/posts/view"
- - "/posts/\__id__/"
- - "/posts/\__id__/view"
+- Open Terminal
+- `bundle install`
+- `rake` or `rake run` (to run the project)
+- `rake test` (to run the tests)
+-  Open [localhost](http://localhost:4567/)
+- Have fun
 
-### POST
- - "/login"
- - "/register"
- - "/posts"
+## Info
 
-### PUT
- - "/posts/\__id__/"
+Beyond The Tech is an university project.
+It uses sqlite for DB and datamapper for ORM.
+
 
 Powered by Sinatra

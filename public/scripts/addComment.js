@@ -12,8 +12,7 @@ $("#comment-btn").click(function() {
         statusCode: {
             200: function() {
                 window.location.reload();
-            },
-            403: function() {}
+            }
         }
     });
 });
@@ -37,8 +36,7 @@ $(".edit-post-btn").click(function() {
                 $(".edit-post-area").val(post.post_content.body)
                 $(".edit-title").val(post.post_content.title)
                 $(".activate-post > input").prop('checked', post.active)
-            },
-            403: function() {}
+            }
         }
     });
 });
@@ -54,11 +52,10 @@ $(".save-post-btn").click(function() {
         data: { body: body, title: title, active: active },
         dataType: "json",
         statusCode: {
-            200: function() {
-                alert("success");
+            200: function(response) {
+                alert(eval(response.responseText + "_texts" + "['CHANGES_APPLIED']"));
                 window.location.reload();
-            },
-            403: function() {}
+            }
         }
     });
 });
@@ -80,8 +77,7 @@ $(".edit-icon").click(function(event) {
             200: function(data) {
                 data = JSON.parse(data);
                 textarea.val(data.text);
-            },
-            403: function() {}
+            }
         }
     });
 });
@@ -97,10 +93,10 @@ $(".save-icon").click(function() {
         data: { text: textarea.val() },
         dataType: "json",
         statusCode: {
-            200: function() {
+            200: function(response) {
+                alert(eval(response.responseText + "_texts" + "['CHANGES_APPLIED']"));
                 window.location.reload();
-            },
-            403: function() {}
+            }
         }
     });
 });
@@ -116,8 +112,7 @@ $(".delete-icon").click(function() {
             statusCode: {
                 200: function() {
                     window.location.reload();
-                },
-                403: function() {}
+                }
             }
         });
     }
@@ -133,8 +128,7 @@ $(".delete-post-icon").click(function() {
             statusCode: {
                 200: function() {
                     window.location = '/posts/view'
-                },
-                403: function() {}
+                }
             }
         });
     }

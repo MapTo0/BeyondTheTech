@@ -3,7 +3,14 @@ require 'redcarpet'
 
 get '/posts/view' do
   posts = Post.all
-  bloggers = User.all.select { |user| user.posts.size > 0 }
+  bloggers = User.all.select do |user|
+    if user_admin?
+      user.posts.all.size > 0
+    else
+      user.posts.all(active: true).size > 0
+    end
+  end
+
   tags = Tag.all.select do |tag|
     tag.posts.any? { |post| user_admin? ? post : post.active }
   end
@@ -131,11 +138,13 @@ put '/posts/:id/edit' do
   })
 
   post.update({ :active => params[:active] })
+  session['lng']
 end
 
 put '/comments/:id/edit' do
   comment = get_post_comment(params[:id].to_i)
   comment.update({ :text => params[:text]})
+  session['lng']
 end
 
 put '/comments/:id/delete' do
