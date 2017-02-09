@@ -3,7 +3,13 @@ source "https://rubygems.org"
 
 gem "sinatra"
 gem "rerun"
-gem "sqlite3"
+group :production do
+  gem 'pg'
+end
+
+group :development do
+  gem 'sqlite3'
+end
 gem "rake"
 gem "data_mapper"
 gem 'bcrypt-ruby', :require => 'bcrypt'
