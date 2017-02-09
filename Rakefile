@@ -12,7 +12,3 @@ task :test do
   end
   Rake::Task["spec"].execute
 end
-
-task :lint do
-  sh 'rubocop'
-end

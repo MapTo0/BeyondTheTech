@@ -1,12 +1,12 @@
 require 'pony'
 
 get '/register' do
-  redirect_users
+  redirect_logged_users
   erb :register, locals: { texts: get_texts }
 end
 
 get '/login' do
-  redirect_users
+  redirect_logged_users
   erb :login, locals: { texts: get_texts }
 end
 
@@ -20,7 +20,11 @@ post '/register' do
   email = params['email']
   password = params['password']
 
-  user = User.create(email: email, username: username, password: password, admin: false)
+  user = User.create(email: email,
+                     username: username,
+                     password: password,
+                     admin: false
+                     )
 
   if user.saved?
     session[:user_id] = user.id
@@ -45,15 +49,5 @@ post '/login' do
     status 200
   else
     status 401
-  end
-end
-
-def redirect_to_home
-  redirect '/'
-end
-
-def redirect_users
-  if session['user_id']
-    redirect_to_home
   end
 end

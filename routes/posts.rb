@@ -1,15 +1,11 @@
 require 'json'
-require 'pry'
 require 'redcarpet'
 
 get '/posts/view' do
   posts = Post.all
-  bloggers = User.all.delete_if { |user| user.posts.size == 0 }
-
-  if user_admin?
-    tags = Tag.all
-  else
-    tags = Tag.all.select { |tag| tag.posts.any? { |post| post.active }}
+  bloggers = User.all.select { |user| user.posts.size > 0 }
+  tags = Tag.all.select do |tag|
+    tag.posts.any? { |post| user_admin? ? post : post.active }
   end
 
   erb :posts, locals: { texts: get_texts, tags: tags, bloggers: bloggers, posts: posts }
@@ -18,62 +14,24 @@ end
 get '/posts' do
   author_id = params['authorId'].to_i
   tag = params['tag'] || "all"
-  byDate = params['byDate']
-  byCommentCount = params['byCommentCount']
-
+  criteria = params['criteria']
+  order = params['order']
   user = User.get(author_id)
-  query = Post.all
 
-  # refactor this piece of shit
-  if author_id > 0
-    query = query.all(:user => user)
-    if tag != "all"
-      query = query & Tag.all(:text => tag).posts
-    end
+  posts_by_author = get_posts_by_author(user)
+  posts_by_tag = get_posts_by_tag(tag)
+
+  query = posts_by_author & posts_by_tag
+
+  if criteria == 'date'
+    query = order_by_date(query, order)
+  elsif criteria == 'cc'
+    query = order_by_cc(query, order)
   else
-    if tag != "all"
-      query = Tag.all(:text => tag).posts
-    end
+    query
   end
 
-  if byDate != ""
-    query = query.all(:order => (byDate == 'desc' ? :date.desc : :date.asc))
-  end
-
-  if byCommentCount != ""
-    query = query.sort_by do |post|
-      if byCommentCount == 'desc'
-        -post.comments.count
-      else
-        post.comments.count
-      end
-    end
-  end
-
-  data = []
-
-  query.each do |post|
-    post_content = post.postContents.select { |content| content.language == session['lng'] }[0]
-
-    if post_content
-      if post.active || admin?(session[:user_id])
-        data << {
-          'title': post_content.title,
-          'author': User.get(post.user_id),
-          'body': post_content.body,
-          'date': post.date.strftime("%d.%m.%Y"),
-          'image': post.image_url,
-          'commentCount': post.comments.count,
-          'language': session['lng'],
-          'id': post.id,
-          'tags': post.tags.map { |tag| "#" + tag.text }
-        }
-      end
-    end
-  end
-
-  p Post.get(4).comments
-  data.to_json
+  serialize_query(query).to_json
 end
 
 get '/posts/create' do
@@ -100,6 +58,20 @@ get '/posts/:id/view' do
   erb :view_post, locals: { post: post, post_content: post_content, body: markdown.render(post_content.body), markdown_renderer: markdown, texts: get_texts }
 end
 
+get '/comments/:id/edit' do
+  comment = get_post_comment(params[:id].to_i)
+  comment.to_json
+end
+
+get '/posts/:id/edit' do
+  post_content = get_post_content(params[:id])
+
+  {
+    post_content: post_content,
+    active: Post.get(params[:id]).active
+  }.to_json
+end
+
 post '/posts' do
   title = params[:title]
   body = params[:body]
@@ -107,31 +79,17 @@ post '/posts' do
   language = params[:language]
   active = params[:active]
   user = User.get(session[:user_id].to_i)
-  tags = params[:tags].split(" ").uniq.map { |tag| Tag.first_or_new(text: tag) }
+  tags = get_unique_tags(params[:tags])
 
   post = Post.new(date: Time.now, active: active, image_url: image_url)
-  postContent = PostContent.new(title: title, body: body, language: language, post_id: post.id)
+  post_content = PostContent.new(title: title, body: body, language: language, post_id: post.id)
 
-  post.postContents << postContent
+  post.postContents << post_content
   user.posts << post
   tags.each { |tag| post.tags << tag }
   post.save
 
   post.id.to_s
-end
-
-put '/posts/:id' do
-  title = params[:title]
-  body = params[:body]
-  post_id = params[:id].to_i
-  language = params[:language]
-  post = Post.get(post_id)
-
-  postContent = PostContent.new(title: title, body: body, language: language, post_id: post_id)
-
-  post.postContents << postContent
-
-  post.save
 end
 
 post '/posts/:id/comment' do
@@ -149,9 +107,18 @@ post '/posts/:id/comment' do
   comment.save
 end
 
-get '/posts/:id/edit' do
-  post_content = get_post_content(params[:id])
-  { post_content: post_content, active: Post.get(params[:id]).active }.to_json
+put '/posts/:id' do
+  title = params[:title]
+  body = params[:body]
+  post_id = params[:id].to_i
+  language = params[:language]
+  post = Post.get(post_id)
+
+  post_content = PostContent.new(title: title, body: body, language: language, post_id: post_id)
+
+  post.postContents << post_content
+
+  post.save
 end
 
 put '/posts/:id/edit' do
@@ -164,34 +131,6 @@ put '/posts/:id/edit' do
   })
 
   post.update({ :active => params[:active] })
-end
-
-def get_post_content post_id
-  post = Post.get(post_id)
-
-  post_content = post.postContents.select do |content|
-    content.language == session['lng']
-  end
-
-  post_content[0]
-end
-
-def get_post_comment comment_id
-  Comment.get(comment_id)
-end
-
-def admin? user_id
-  current_user = User.get(user_id)
-  current_user && current_user.admin
-end
-
-def user_admin?
-  admin? session['user_id']
-end
-
-get '/comments/:id/edit' do
-  comment = get_post_comment(params[:id].to_i)
-  comment.to_json
 end
 
 put '/comments/:id/edit' do
@@ -212,18 +151,70 @@ put '/posts/:id/delete' do
   post.destroy
 end
 
-def redirect_to_home
-  redirect '/'
+def get_post_content post_id
+  post = Post.get(post_id)
+
+  post_content = post.postContents.select do |content|
+    content.language == session['lng']
+  end
+
+  post_content[0]
 end
 
-def check_auth_and_redirect
-  unless session['user_id']
-    redirect_to_home
+def get_post_comment comment_id
+  Comment.get(comment_id)
+end
+
+def get_posts_by_author(author)
+  if (author)
+    Post.all(:user => author)
+  else
+    Post.all
   end
 end
 
-def check_admin_and_redirect
-  unless user_admin?
-    redirect_to_home
+def get_posts_by_tag(tag)
+  if tag != "all"
+    Tag.all(:text => tag).posts
+  else
+    Post.all
   end
+end
+
+def order_by_date(query, order)
+  query.all(:order => (order == 'desc' ? :date.desc : :date.asc))
+end
+
+def order_by_cc(query, order)
+  query.sort_by do |post|
+    order == 'desc' ? -post.comments.count :  post.comments.count
+  end
+end
+
+def serialize_query(query)
+  data = []
+  query.each do |post|
+    post_content = post.postContents.select { |content| content.language =session['lng'] }[0]
+    if post_content
+      if post.active || admin?(session[:user_id])
+        data << {
+          'title': post_content.title,
+          'author': User.get(post.user_id),
+          'body': post_content.body,
+          'date': post.date.strftime("%d.%m.%Y"),
+          'image': post.image_url,
+          'commentCount': post.comments.count,
+          'language': session['lng'],
+          'id': post.id,
+          'tags': post.tags.map { |tag| "#" + tag.text }
+        }
+      end
+    end
+  end
+
+  data
+end
+
+def get_unique_tags(tags)
+  tags.split(" ").uniq.map { |tag| Tag.first_or_new(text: tag) }
 end

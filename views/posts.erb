@@ -29,16 +29,16 @@
         <h2 class="users-titles"><%= texts["SEARCH_POST_ORDERING"] %></h2>
         <div class="criterias">
           <div class="criteria order">
-            <label><%= texts["SEARCH_POST_BY_DATE"] %></label>
+            <label><%= texts["SEARCH_POST_CRITERIA"] %></label>
               <select name="date" class="criteria-select">
                 <option value=""><%= texts["SEARCH_POST_NA"] %></option>
-                <option value="asc"><%= texts["SEARCH_POST_ASC"] %></option>
-                <option value="desc"><%= texts["SEARCH_POST_DESC"] %></option>
+                <option value="date"><%= texts["SEARCH_POST_BY_DATE"] %></option>
+                <option value="cc"><%= texts["SEARCH_POST_BY_CC"] %></option>
               </select>
           </div>
 
           <div class="criteria order">
-            <label><%= texts["SEARCH_POST_BY_CC"] %></label>
+            <label><%= texts["SEARCH_POST_ORDER_TYPE"] %></label>
               <select name="comment" class="criteria-select">
                 <option value=""><%= texts["SEARCH_POST_NA"] %></option>
                 <option value="asc"><%= texts["SEARCH_POST_ASC"] %></option>

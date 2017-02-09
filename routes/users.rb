@@ -1,18 +1,11 @@
-set(:admin) do |*roles|
-  condition do
-    unless user_admin?
-      redirect "/", 303
-    end
-  end
-end
-
-get '/users', :admin => [:admin] do
+get '/users' do
+  check_admin_and_redirect
   erb :users, locals: { texts: get_texts,
                         regulars: User.all(:admin => false),
-                        admins: admins_except_current }
+                        admins: get_admins_except_current }
 end
 
-def admins_except_current
+def get_admins_except_current
   User.all(:admin => true, :id.not => session[:user_id])
 end
 
@@ -64,33 +57,5 @@ post '/user/password' do
       :domain               => "localhost.localdomain"
     }
     [200, session['lng']]
-  end
-end
-
-get '/user/profile' do
-  check_auth_and_redirect
-  erb :profile, locals: { texts: get_texts }
-end
-
-def admin? user_id
-  current_user = User.get(user_id)
-  current_user && current_user.admin
-end
-
-def user_admin?
-  admin? session['user_id']
-end
-
-def logged? arg
-  !!session['user_id']
-end
-
-def redirect_to_home
-  redirect '/'
-end
-
-def check_auth_and_redirect
-  unless session['user_id']
-    redirect_to_home
   end
 end
